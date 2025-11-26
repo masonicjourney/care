@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>About Us - RiseGen | Supporting Gen Z Voices</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Learn about RiseGen - a community-powered platform supporting Gen Z protestors across East Africa. Discover our mission, vision, values, and the team behind our movement.">
+    <meta name="keywords" content="RiseGen, about us, Gen Z support, youth empowerment, protest safety, East Africa NGO, youth rights, community platform, our mission, our team">
+    <meta name="author" content="RiseGen">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://risegen.org/about">
+    <meta property="og:title" content="About RiseGen - Supporting Gen Z Voices">
+    <meta property="og:description" content="Discover the story behind RiseGen. We're a community-powered platform dedicated to protecting and empowering Gen Z protestors across East Africa.">
+    <meta property="og:image" content="https://risegen.org/img/og-about.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="RiseGen">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://risegen.org/about">
+    <meta name="twitter:title" content="About RiseGen - Supporting Gen Z Voices">
+    <meta name="twitter:description" content="Discover the story behind RiseGen. We're a community-powered platform dedicated to protecting and empowering Gen Z protestors across East Africa.">
+    <meta name="twitter:image" content="https://risegen.org/img/og-about.jpg">
+    <meta name="twitter:site" content="@RiseGenOrg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://risegen.org/about">
+    
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="KE">
+    <meta name="geo.placename" content="Nairobi">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About RiseGen",
+        "description": "Learn about RiseGen - a community-powered platform supporting Gen Z protestors across East Africa.",
+        "url": "https://risegen.org/about",
+        "mainEntity": {
+            "@type": "NGO",
+            "name": "RiseGen",
+            "alternateName": "Rise Gen",
+            "description": "A community-powered platform created to support Gen Z protestors with emergency medical assistance, legal support, and safety resources.",
+            "url": "https://risegen.org",
+            "logo": "https://risegen.org/img/logo.png",
+            "foundingDate": "2024",
+            "foundingLocation": {
+                "@type": "Place",
+                "name": "Nairobi, Kenya"
+            },
+            "areaServed": ["Kenya", "Tanzania", "East Africa"],
+            "sameAs": [
+                "https://twitter.com/RiseGenOrg",
+                "https://facebook.com/RiseGen",
+                "https://instagram.com/RiseGen",
+                "https://linkedin.com/company/risegen"
+            ]
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://risegen.org"},
+                {"@type": "ListItem", "position": 2, "name": "About", "item": "https://risegen.org/about"}
+            ]
+        }
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <!-- Custom About Page Styles -->
+    <style>
+        :root {
+            --primary-color: #FE5D14;
+            --secondary-color: #FEF2E9;
+            --dark-color: #091E3E;
+        }
+        
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background: var(--primary-color);
+            border: 4px solid #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(254, 93, 20, 0.2);
+            z-index: 1;
+        }
+        
+        .timeline-content {
+            width: 45%;
+            padding: 25px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: auto;
+        }
+        
+        .timeline-date {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        /* Value Cards */
+        .value-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            height: 100%;
+            border-top: 4px solid transparent;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-top-color: var(--primary-color);
+            box-shadow: 0 15px 40px rgba(254, 93, 20, 0.15);
+        }
+        
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), #ff8c5a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: #fff;
+            font-size: 32px;
+            transition: all 0.4s ease;
+        }
+        
+        .value-card:hover .value-icon {
+            transform: rotateY(180deg);
+        }
+        
+        /* Team Cards */
+        .team-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .team-img {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-img img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .team-card:hover .team-img img {
+            transform: scale(1.1);
+        }
+        
+        .team-social {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            transition: all 0.3s ease;
+        }
+        
+        .team-card:hover .team-social {
+            bottom: 0;
+        }
+        
+        .team-social a {
+            width: 35px;
+            height: 35px;
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .team-social a:hover {
+            background: #fff;
+            color: var(--primary-color);
+        }
+        
+        .team-info {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        /* Stats Section */
+        .stat-box {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Mission/Vision Boxes */
+        .mission-box {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            height: 100%;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mission-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary-color);
+        }
+        
+        .mission-box .icon-box {
+            width: 70px;
+            height: 70px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .mission-box .icon-box i {
+            font-size: 28px;
+            color: var(--primary-color);
+        }
+        
+        /* Quote Section */
+        .quote-section {
+            background: linear-gradient(135deg, var(--dark-color), #0d2a52);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quote-section::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            font-size: 200px;
+            color: rgba(254, 93, 20, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        /* Responsive Timeline */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-marker {
+                left: 20px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 50px);
+                margin-left: 50px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="top-bar text-white-50 row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+      
+            </div>
+            <div class="col-lg-6 px-5 text-end">
+                <small>Follow us:</small>
+                <a class="text-white-50 ms-3" href="https://twitter.com/RiseGenOrg"><i class="fab fa-twitter"></i></a>
+                <a class="text-white-50 ms-3" href="https://facebook.com/RiseGen"><i class="fab fa-facebook-f"></i></a>
+                <a class="text-white-50 ms-3" href="https://linkedin.com/company/risegen"><i class="fab fa-linkedin-in"></i></a>
+                <a class="text-white-50 ms-3" href="https://instagram.com/RiseGen"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+            <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+                <h1 class="fw-bold text-primary m-0">Care4<span class="text-white">Voices</span></h1>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="about.html" class="nav-item nav-link active">About</a>
+                    <a href="events.html" class="nav-item nav-link">Events</a>
+                    <a href="donate.html" class="nav-item nav-link">Donate</a>
+                    <a href="video.html" class="dropdown-item">Videos</a>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                </div>
+                <div class="d-none d-lg-flex ms-2">
+                    <a class="btn btn-outline-primary py-2 px-3" href="donate.html">
+                        Donate Now
+                        <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                            <i class="fa fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center">
+            <h1 class="display-4 text-white animated slideInDown mb-4">About Us</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page">About</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- About Intro Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="position-relative overflow-hidden h-100" style="min-height: 450px;">
+                        <img class="position-absolute w-100 h-100 pt-5 pe-5" src="img/about-1.jpg" alt="Gen Z protesters standing together" style="object-fit: cover; border-radius: 10px;">
+                        <img class="position-absolute top-0 end-0 bg-white ps-3 pb-3" src="img/about-2.jpg" alt="Youth empowerment" style="width: 220px; height: 220px; object-fit: cover; border-radius: 10px;">
+                        <div class="position-absolute bottom-0 start-0 bg-primary text-white p-4" style="border-radius: 10px;">
+                            <h3 class="mb-0">Est. 2024</h3>
+                            <small>Nairobi, Kenya</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Who We Are</div>
+                    <h1 class="display-6 mb-4">Empowering Gen Z to Stand Up Safely</h1>
+                    <p class="fs-5 text-muted mb-4">RiseGen is a community-powered platform created by young people, for young people. We emerged from the realization that Gen Z activists across East Africa needed more than just moral support—they needed real, tangible resources to protest safely.</p>
+                    <p class="mb-4">When young people take to the streets to demand climate action, social justice, or political reform, they often face unexpected challenges: tear gas, arrests, injuries, and exhaustion. We exist to ensure that no young activist stands alone in these moments.</p>
+                    <p class="mb-4">Our network of volunteers, medical professionals, lawyers, and donors works together to provide immediate assistance when it's needed most. From first aid kits distributed at protest sites to legal representation for detained activists, we cover every aspect of protest safety.</p>
+                    <div class="row g-4 mb-4">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0 btn-lg-square bg-primary rounded-circle">
+                                    <i class="fa fa-check text-white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">Community-Powered</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0 btn-lg-square bg-primary rounded-circle">
+                                    <i class="fa fa-check text-white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">100% Transparent</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0 btn-lg-square bg-primary rounded-circle">
+                                    <i class="fa fa-check text-white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">Youth-Led Initiative</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0 btn-lg-square bg-primary rounded-circle">
+                                    <i class="fa fa-check text-white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <h6 class="mb-0">East Africa Focus</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Intro End -->
+
+
+    <!-- Mission & Vision Start -->
+    <div class="container-xxl bg-light py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Our Purpose</div>
+                <h1 class="display-6 mb-4">What Drives Us Forward</h1>
+                <p class="text-muted">Every action we take is guided by our commitment to protecting young voices and building a safer future for Gen Z activism.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="mission-box">
+                        <div class="icon-box">
+                            <i class="fa fa-bullseye"></i>
+                        </div>
+                        <h3 class="mb-3">Our Mission</h3>
+                        <p class="text-muted mb-4">To protect, empower, and uplift Gen Z during protests by providing real support when they need it most.</p>
+                        <p class="mb-0">We achieve this through:</p>
+                        <ul class="mt-3 text-muted">
+                            <li class="mb-2">Rapid deployment of medical volunteers to protest sites</li>
+                            <li class="mb-2">24/7 legal hotline for detained activists</li>
+                            <li class="mb-2">Distribution of safety equipment and supplies</li>
+                            <li class="mb-2">Post-protest mental health support</li>
+                            <li>Know-your-rights education programs</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="mission-box">
+                        <div class="icon-box">
+                            <i class="fa fa-eye"></i>
+                        </div>
+                        <h3 class="mb-3">Our Vision</h3>
+                        <p class="text-muted mb-4">A world where young people can protest safely, confidently, and without fear.</p>
+                        <p class="mb-0">We envision:</p>
+                        <ul class="mt-3 text-muted">
+                            <li class="mb-2">Every Gen Z activist knowing their rights</li>
+                            <li class="mb-2">No young person detained without legal support</li>
+                            <li class="mb-2">Safe spaces for youth-led movements to flourish</li>
+                            <li class="mb-2">A generation that transforms society peacefully</li>
+                            <li>East Africa leading in youth civic engagement</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mission & Vision End -->
+
+
+    <!-- Impact Stats Start -->
+    <div class="container-fluid bg-primary py-5">
+        <div class="container py-4">
+            <div class="row g-4 text-center">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="stat-box">
+                        <div class="stat-number text-white">2,500+</div>
+                        <div class="stat-label text-white-50">Activists Supported</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="stat-box">
+                        <div class="stat-number text-white">150+</div>
+                        <div class="stat-label text-white-50">Legal Cases Resolved</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="stat-box">
+                        <div class="stat-number text-white">45+</div>
+                        <div class="stat-label text-white-50">Events Covered</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="stat-box">
+                        <div class="stat-number text-white">500+</div>
+                        <div class="stat-label text-white-50">Active Volunteers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Impact Stats End -->
+
+
+    <!-- Our Values Start -->
+    <div class="container-xxl py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">What We Stand For</div>
+                <h1 class="display-6 mb-4">Our Core Values</h1>
+                <p class="text-muted">These principles guide every decision we make and every action we take in supporting Gen Z activists.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fa fa-hands-helping"></i>
+                        </div>
+                        <h4 class="mb-3">Unity</h4>
+                        <p class="text-muted mb-0">We stand together as one generation. Our strength comes from solidarity—when one of us rises, we all rise. No activist is ever alone in their struggle for change.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fa fa-shield-alt"></i>
+                        </div>
+                        <h4 class="mb-3">Safety</h4>
+                        <p class="text-muted mb-0">Everyone deserves protection. We prioritize the physical, mental, and legal safety of every young person who dares to speak up for what they believe in.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fa fa-search-dollar"></i>
+                        </div>
+                        <h4 class="mb-3">Transparency</h4>
+                        <p class="text-muted mb-0">Every donation works for Gen Z's well-being. We publish detailed reports showing exactly where funds go, because your trust is sacred to us.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fa fa-fist-raised"></i>
+                        </div>
+                        <h4 class="mb-3">Courage</h4>
+                        <p class="text-muted mb-0">Speaking up should never come with fear. We celebrate the bravery of young activists and work to ensure courage is met with support, not punishment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Our Values End -->
+
+
+    <!-- Quote Section Start -->
+    <div class="quote-section py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <p class="display-6 text-white mb-4 fst-italic">"Gen Z doesn't just want change—they're building it. Our job is to make sure they can do it safely."</p>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img src="img/testimonial-1.jpg" alt="Founder" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                        <div class="text-start">
+                            <h5 class="text-white mb-0">RiseGen Founding Team</h5>
+                            <small class="text-white-50">Nairobi, 2024</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quote Section End -->
+
+
+    <!-- Our Story Timeline Start -->
+    <div class="container-xxl py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Our Journey</div>
+                <h1 class="display-6 mb-4">How RiseGen Began</h1>
+                <p class="text-muted">From a small group of concerned youth to a movement protecting thousands across East Africa.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Early 2024</span>
+                        <h5>The Spark</h5>
+                        <p class="text-muted mb-0">A group of university students in Nairobi witnessed fellow protesters being detained without legal support. They realized someone needed to step up—and decided it would be them.</p>
+                    </div>
+                </div>
+                <div class="timeline-item wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Mid 2024</span>
+                        <h5>Building the Network</h5>
+                        <p class="text-muted mb-0">We connected with lawyers, medical professionals, and donors who shared our vision. The first RiseGen volunteer teams were formed across Nairobi and Dar es Salaam.</p>
+                    </div>
+                </div>
+                <div class="timeline-item wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">Late 2024</span>
+                        <h5>First Major Response</h5>
+                        <p class="text-muted mb-0">During the Youth Climate March, RiseGen deployed 50 volunteers, provided first aid to 200+ protesters, and secured legal representation for 15 detained activists within hours.</p>
+                    </div>
+                </div>
+                <div class="timeline-item wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2025</span>
+                        <h5>Growing Impact</h5>
+                        <p class="text-muted mb-0">Today, RiseGen operates across East Africa with 500+ active volunteers, partnerships with 20+ law firms, and a track record of supporting every major youth-led protest in the region.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Our Story Timeline End -->
+
+
+    <!-- Team Section Start -->
+    <div class="container-xxl bg-light py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <div class="d-inline-block rounded-pill bg-secondary text-primary py-1 px-3 mb-3">Our People</div>
+                <h1 class="display-6 mb-4">Meet the Team</h1>
+                <p class="text-muted">Young leaders dedicated to protecting the voices of their generation.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="team-card">
+                        <div class="team-img">
+                            <img src="img/team-1.jpg" alt="Amani Ochieng">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="team-info">
+                            <h5 class="mb-1">Amani Ochieng</h5>
+                            <p class="text-primary mb-2">Co-Founder & Director</p>
+                            <small class="text-muted">Former student activist turned organizer, leading RiseGen's strategic vision.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="team-card">
+                        <div class="team-img">
+                            <img src="img/team-2.jpg" alt="Zawadi Mwangi">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="team-info">
+                            <h5 class="mb-1">Zawadi Mwangi</h5>
+                            <p class="text-primary mb-2">Legal Coordinator</p>
+                            <small class="text-muted">Law graduate managing our network of pro-bono attorneys across East Africa.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="team-card">
+                        <div class="team-img">
+                            <img src="img/team-3.jpg" alt="Jabari Hassan">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="team-info">
+                            <h5 class="mb-1">Jabari Hassan</h5>
+                            <p class="text-primary mb-2">Medical Response Lead</p>
+                            <small class="text-muted">Medical student coordinating first aid volunteers and emergency response teams.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
+                    <div class="team-card">
+                        <div class="team-img">
+                            <img src="img/team-4.jpg" alt="Neema Kimani">
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="team-info">
+                            <h5 class="mb-1">Neema Kimani</h5>
+                            <p class="text-primary mb-2">Community Outreach</p>
+                            <small class="text-muted">Building partnerships with youth organizations and coordinating volunteer recruitment.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team Section End -->
+
+
+    <!-- CTA Section Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="bg-primary rounded p-5 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-8">
+                        <h2 class="text-white mb-3">Ready to Join the Movement?</h2>
+                        <p class="text-white-50 mb-0">Whether you want to donate, volunteer, or simply spread the word—every action helps protect a young voice. Together, we can ensure Gen Z stands up safely.</p>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a class="btn btn-light py-3 px-4 me-2" href="donate.html">
+                            Donate Now
+                            <i class="fa fa-arrow-right ms-2"></i>
+                        </a>
+                        <a class="btn btn-outline-light py-3 px-4" href="contact.html">
+                            Volunteer
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CTA Section End -->
+
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h1 class="fw-bold text-primary mb-4">Care4<span class="text-white">Voices</span></h1>
+                    <p>Support the Voices of Gen Z. A simple, friendly, motivating donations platform for Gen Z protest safety, support, and empowerment.</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square me-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square me-1" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Contact Us</h5>
+                    <p><i class="fab fa-whatsapp me-3"></i>+255 687-799-929</p>
+                    <p><i class="fa fa-envelope me-3"></i>support@risegen.org</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Quick Links</h5>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="events.html">Events</a>
+                    <a class="btn btn-link" href="donate.html">Donate</a>
+                    <a class="btn btn-link" href="">Support</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Newsletter</h5>
+                    <p>Stay updated with our events and impact stories.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a href="#">Care4Voices</a>, All Right Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/parallax/parallax.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

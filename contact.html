@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!-- Enhanced SEO title with primary keywords -->
+    <title>Contact Us | RiseGen - Get Support & Connect with Gen Z Activists</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+    <!-- Comprehensive SEO meta tags -->
+    <meta name="description" content="Contact RiseGen for support during protests, volunteering opportunities, or partnership inquiries. We're here for Gen Z activists across Kenya, Tanzania, and Uganda.">
+    <meta name="keywords" content="contact RiseGen, Gen Z support contact, protest help East Africa, volunteer with RiseGen, activism support Kenya, Tanzania protests, Uganda youth movement">
+    <meta name="author" content="RiseGen Organization">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://risegen.org/contact">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://risegen.org/contact">
+    <meta property="og:title" content="Contact RiseGen - We're Here For You">
+    <meta property="og:description" content="Have questions, want to volunteer, or need help during a protest? Connect with RiseGen today.">
+    <meta property="og:image" content="https://risegen.org/img/og-contact.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="RiseGen">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://risegen.org/contact">
+    <meta name="twitter:title" content="Contact RiseGen - We're Here For You">
+    <meta name="twitter:description" content="Have questions, want to volunteer, or need help during a protest? Connect with RiseGen today.">
+    <meta name="twitter:image" content="https://risegen.org/img/twitter-contact.jpg">
+    <meta name="twitter:site" content="@RiseGenOrg">
+    
+    <!-- Additional SEO tags -->
+    <meta name="theme-color" content="#FE5D14">
+    <meta name="geo.region" content="KE">
+    <meta name="geo.placename" content="Nairobi">
+    <meta name="language" content="English">
+    
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact RiseGen",
+        "description": "Contact page for RiseGen - Support for Gen Z activists",
+        "url": "https://risegen.org/contact",
+        "mainEntity": {
+            "@type": "NGO",
+            "name": "RiseGen",
+            "url": "https://risegen.org",
+            "contactPoint": [
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+254-700-000-000",
+                    "contactType": "customer service",
+                    "email": "support@risegen.org",
+                    "areaServed": ["KE", "TZ", "UG"],
+                    "availableLanguage": ["English", "Swahili"]
+                },
+                {
+                    "@type": "ContactPoint",
+                    "telephone": "+254-700-000-000",
+                    "contactType": "emergency",
+                    "email": "emergency@risegen.org",
+                    "contactOption": "TollFree"
+                }
+            ],
+            "address": [
+                {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Nairobi",
+                    "addressCountry": "Kenya"
+                },
+                {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Dar es Salaam",
+                    "addressCountry": "Tanzania"
+                }
+            ]
+        }
+    }
+    </script>
+    
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://risegen.org/"},
+            {"@type": "ListItem", "position": 2, "name": "Contact", "item": "https://risegen.org/contact"}
+        ]
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
+    <!-- Custom Contact Page Styles -->
+    <style>
+        :root {
+            --primary-color: #FE5D14;
+            --secondary-color: #FEF2E9;
+            --dark-color: #091E3E;
+        }
+        
+        /* Map Container */
+        .map-container {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        
+        #protest-map {
+            height: 500px;
+            width: 100%;
+            z-index: 1;
+        }
+        
+        /* Map Legend */
+        .map-legend {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .legend-item:hover {
+            background: var(--secondary-color);
+        }
+        
+        .legend-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .legend-dot.past {
+            background: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(254, 93, 20, 0.3);
+        }
+        
+        .legend-dot.future {
+            background: #28a745;
+            box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.3);
+            animation: pulse-green 2s infinite;
+        }
+        
+        .legend-dot.planned {
+            background: #ffc107;
+            box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.3);
+        }
+        
+        @keyframes pulse-green {
+            0%, 100% { box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.3); }
+            50% { box-shadow: 0 0 0 8px rgba(40, 167, 69, 0.1); }
+        }
+        
+        /* Protest Timeline */
+        .protest-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .protest-timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary-color), #28a745);
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .timeline-item.past {
+            border-left-color: var(--primary-color);
+        }
+        
+        .timeline-item.future {
+            border-left-color: #28a745;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -34px;
+            top: 25px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .timeline-item.past::before {
+            background: var(--primary-color);
+        }
+        
+        .timeline-item.future::before {
+            background: #28a745;
+            animation: pulse-green 2s infinite;
+        }
+        
+        .timeline-date {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-date.past {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        .timeline-date.future {
+            background: rgba(40, 167, 69, 0.15);
+            color: #28a745;
+        }
+        
+        /* Country Cards */
+        .country-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            height: 100%;
+        }
+        
+        .country-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .country-card.active {
+            border-color: var(--primary-color);
+        }
+        
+        .country-card.upcoming {
+            border-color: #28a745;
+        }
+        
+        .country-flag {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .country-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .country-status.active {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        .country-status.upcoming {
+            background: rgba(40, 167, 69, 0.15);
+            color: #28a745;
+        }
+        
+        .country-status.planned {
+            background: rgba(255, 193, 7, 0.2);
+            color: #856404;
+        }
+        
+        /* Contact Cards */
+        .contact-info-card {
+            background: linear-gradient(135deg, var(--dark-color) 0%, #1a3a5c 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
+        }
+        
+        .contact-info-card .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .contact-info-card .info-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .contact-info-card .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .contact-info-card .info-icon i {
+            font-size: 1.3rem;
+        }
+        
+        /* Contact Form */
+        .contact-form-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form-card .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form-card .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(254, 93, 20, 0.1);
+        }
+        
+        .contact-form-card textarea.form-control {
+            min-height: 150px;
+            resize: none;
+        }
+        
+        /* Emergency Banner */
+        .emergency-banner {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .emergency-banner .pulse-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: emergency-pulse 1.5s infinite;
+        }
+        
+        @keyframes emergency-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Social Links */
+        .social-contact-links a {
+            width: 50px;
+            height: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-contact-links a:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        /* Leaflet Custom Markers */
+        .custom-marker {
+            background: var(--primary-color);
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+        
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .leaflet-popup-content {
+            margin: 15px 20px;
+        }
+        
+        .popup-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+        
+        .popup-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .popup-status {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        
+        .popup-status.past {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        .popup-status.future {
+            background: rgba(40, 167, 69, 0.15);
+            color: #28a745;
+        }
+
+        /* Live News Feed Styles */
+        .news-feed-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+        }
+        
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+        }
+        
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #28a745;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: livePulse 1.5s infinite;
+        }
+        
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        .news-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .news-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .news-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(254, 93, 20, 0.1) 0%, rgba(254, 93, 20, 0.05) 100%);
+        }
+        
+        .news-category {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .news-category.announcement { background: #FE5D14; color: white; }
+        .news-category.report { background: #28a745; color: white; }
+        .news-category.guide { background: #17a2b8; color: white; }
+        .news-category.update { background: #6c757d; color: white; }
+        .news-category.alert { background: #dc3545; color: white; }
+        
+        .news-date {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+        
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 10px 0;
+            color: white;
+        }
+        
+        .news-summary {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        
+        /* Event Status Cards */
+        .event-status-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+        }
+        
+        .event-status-card:hover {
+            transform: translateX(5px);
+        }
+        
+        .event-status-card.completed { border-color: #FE5D14; }
+        .event-status-card.upcoming { border-color: #28a745; }
+        .event-status-card.planned { border-color: #ffc107; }
+        
+        .event-countdown {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+        
+        /* Auto-update indicator */
+        .auto-update-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+        
+        .auto-update-badge i {
+            margin-right: 5px;
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .last-updated {
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="top-bar text-white-50 row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+              
+            </div>
+            <div class="col-lg-6 px-5 text-end">
+                <small>Follow us:</small>
+                <a class="text-white-50 ms-3" href="https://twitter.com/RiseGenOrg"><i class="fab fa-twitter"></i></a>
+                <a class="text-white-50 ms-3" href="https://facebook.com/RiseGen"><i class="fab fa-facebook-f"></i></a>
+                <a class="text-white-50 ms-3" href="https://linkedin.com/company/risegen"><i class="fab fa-linkedin-in"></i></a>
+                <a class="text-white-50 ms-3" href="https://instagram.com/RiseGen"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+            <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+                <h1 class="fw-bold text-primary m-0">Care4<span class="text-white">Voices</span></h1>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div  class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="events.html" class="nav-item nav-link">Events</a>
+                    <a href="donate.html" class="nav-item nav-link">Donate</a>
+                    <a href="video.html" class="dropdown-item">Videos</a>
+                    <a href="contact.html" class="nav-item nav-link active">Contact</a>
+                </div>
+                <div class="d-none d-lg-flex ms-2">
+                    <a class="btn btn-outline-primary py-2 px-3" href="donate.html">
+                        Donate Now
+                        <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                            <i class="fa fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center">
+            <h1 class="display-4 text-white animated slideInDown mb-4">Contact Us</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page">Contact</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Emergency Contact Banner Start -->
+    <div class="container-xxl py-3">
+        <div class="container">
+            <div class="emergency-banner wow fadeInUp" data-wow-delay="0.1s">
+                <div class="d-flex align-items-center">
+                    <div class="pulse-icon me-4">
+                        <i class="fas fa-exclamation-triangle fa-2x"></i>
+                    </div>
+                    <div>
+                        <h4 class="mb-1">Emergency Support Line</h4>
+                        <p class="mb-0 opacity-75">Need urgent help during a protest? We're available 24/7</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-3">
+                    <a href="tel:+255 687 799 929" class="btn btn-light btn-lg">
+                        <i class="fas fa-phone-alt me-2"></i>Call Now
+                    </a>
+                    <a href="https://wa.me/+255687799929" class="btn btn-outline-light btn-lg">
+                        <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Emergency Contact Banner End -->
+
+    <!-- Live News & Updates Section Start -->
+    <div class="container-xxl py-5 news-feed-section">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+                <div>
+                    <div class="d-flex align-items-center gap-3 mb-2">
+                        <span class="live-indicator">
+                            <span class="live-dot"></span>
+                            LIVE UPDATES
+                        </span>
+                        <span class="auto-update-badge">
+                            <i class="fas fa-sync-alt"></i>
+                            Auto-updating
+                        </span>
+                    </div>
+                    <h2 class="text-white mb-0">Latest News & Events</h2>
+                    <p class="last-updated text-white-50 mb-0" id="lastUpdated">Last updated: Loading...</p>
+                </div>
+                <a href="events.html" class="btn btn-outline-light">
+                    View All Events <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+            
+            <!-- Upcoming Event Countdown -->
+            <div class="row mb-4" id="countdownSection">
+                <div class="col-12">
+                    <div class="bg-white bg-opacity-10 rounded-3 p-4">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 mb-3 mb-lg-0">
+                                <h4 class="text-white mb-2" id="nextEventTitle">Loading next event...</h4>
+                                <p class="text-white-50 mb-0" id="nextEventDesc"></p>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="d-flex justify-content-lg-end gap-3" id="countdownTimer">
+                                    <div class="event-countdown">
+                                        <div class="countdown-number" id="countDays">--</div>
+                                        <div class="countdown-label">Days</div>
+                                    </div>
+                                    <div class="event-countdown">
+                                        <div class="countdown-number" id="countHours">--</div>
+                                        <div class="countdown-label">Hours</div>
+                                    </div>
+                                    <div class="event-countdown">
+                                        <div class="countdown-number" id="countMinutes">--</div>
+                                        <div class="countdown-label">Minutes</div>
+                                    </div>
+                                    <div class="event-countdown">
+                                        <div class="countdown-number" id="countSeconds">--</div>
+                                        <div class="countdown-label">Seconds</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- News Cards Grid -->
+            <div class="row g-4" id="newsGrid">
+                <!-- News cards will be dynamically loaded here -->
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="text-white-50 mt-3">Loading latest news...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Live News & Updates Section End -->
+
+    <!-- Contact Intro Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="d-inline-block border rounded-pill py-1 px-4 text-primary">Get In Touch</p>
+                <h1 class="mb-4">We're Here For You</h1>
+                <p class="text-muted">Have questions, want to volunteer, or need help during a protest? We're always ready to support Gen Z activists across East Africa. Send us a message and we'll respond as quickly as possible.</p>
+            </div>
+        </div>
+    </div>
+    <!-- Contact Intro End -->
+
+    <!-- Movement Map Section Start -->
+    <div class="container-xxl py-5 bg-light">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="d-inline-block border rounded-pill py-1 px-4 text-primary">Our Movement</p>
+                <h2 class="mb-4">Where We Stand Together</h2>
+                <p class="text-muted">Track where Gen Z has risen and where the movement is heading next. Together, we're building a united voice across East Africa.</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Map Column -->
+                <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="map-container">
+                        <div id="protest-map"></div>
+                    </div>
+                </div>
+                
+                <!-- Legend & Timeline Column -->
+                <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="map-legend mb-4">
+                        <h5 class="mb-3"><i class="fas fa-map-signs text-primary me-2"></i>Map Legend</h5>
+                        <div class="legend-item">
+                            <span class="legend-dot past"></span>
+                            <div>
+                                <strong>Past Protests</strong>
+                                <small class="d-block text-muted">Movements that shaped change</small>
+                            </div>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot future"></span>
+                            <div>
+                                <strong>Upcoming Protests</strong>
+                                <small class="d-block text-muted">Join the next wave</small>
+                            </div>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot planned"></span>
+                            <div>
+                                <strong>Planned Expansion</strong>
+                                <small class="d-block text-muted">Future movement growth</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Stats -->
+                    <div class="bg-primary text-white rounded p-4">
+                        <h5 class="mb-4"><i class="fas fa-chart-line me-2"></i>Movement Stats</h5>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Countries Active</span>
+                            <strong>2</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Protests Supported</span>
+                            <strong>15+</strong>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Activists Reached</span>
+                            <strong>2,500+</strong>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Cities Covered</span>
+                            <strong>8</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Movement Map Section End -->
+
+    <!-- Country Cards Section Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="d-inline-block border rounded-pill py-1 px-4 text-primary">East Africa United</p>
+                <h2 class="mb-4">Countries in the Movement</h2>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Kenya -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="country-card active">
+                        <img src="https://flagcdn.com/w160/ke.png" alt="Kenya Flag" class="country-flag">
+                        <h4>Kenya</h4>
+                        <p class="text-muted mb-2">The birthplace of Care4voices. Our movement started here with the June-July 2024 protests against Finance Bill 2024.</p>
+                        <div class="mb-3">
+                            <small class="text-muted"><i class="fas fa-map-marker-alt text-primary me-1"></i> Nairobi, Mombasa, Kisumu, Eldoret</small>
+                        </div>
+                        <span class="country-status active"><i class="fas fa-fire me-1"></i>Movement Origin</span>
+                        <div class="mt-3 pt-3 border-top">
+                            <small><strong>Key Dates:</strong> June 18 - July 2024</small><br>
+                            <small class="text-muted">Historic #RejectFinanceBill2024 protests</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tanzania -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="country-card upcoming">
+                        <img src="https://flagcdn.com/w160/tz.png" alt="Tanzania Flag" class="country-flag">
+                        <h4>Tanzania</h4>
+                        <p class="text-muted mb-2">Tanzanian Gen Z is preparing to rise on Independence Day 2024.</p>
+                        <div class="mb-3">
+                            <small class="text-muted"><i class="fas fa-map-marker-alt text-success me-1"></i> Dar es Salaam, Arusha, Dodoma</small>
+                        </div>
+                        <span class="country-status upcoming"><i class="fas fa-clock me-1"></i>December 9, 2024</span>
+                        <div class="mt-3 pt-3 border-top">
+                            <small><strong>Upcoming:</strong> Independence Day Protest</small><br>
+                            <small class="text-muted">Gen Z demands accountability</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Uganda -->
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="country-card">
+                        <img src="https://flagcdn.com/w160/ug.png" alt="Uganda Flag" class="country-flag">
+                        <h4>Uganda</h4>
+                        <p class="text-muted mb-2">Planning phase. Ugandan youth are organizing and connecting with the movement.</p>
+                        <div class="mb-3">
+                            <small class="text-muted"><i class="fas fa-map-marker-alt text-warning me-1"></i> Kampala, Entebbe, Jinja</small>
+                        </div>
+                        <span class="country-status planned"><i class="fas fa-seedling me-1"></i>Coming Soon</span>
+                        <div class="mt-3 pt-3 border-top">
+                            <small><strong>Status:</strong> Building networks</small><br>
+                            <small class="text-muted">Solidarity across borders</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Country Cards Section End -->
+
+    <!-- Protest Timeline Section Start -->
+    <div class="container-xxl py-5 bg-light">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
+                    <p class="d-inline-block border rounded-pill py-1 px-4 text-primary">Our Journey</p>
+                    <h2 class="mb-4">Movement Timeline</h2>
+                    <p class="text-muted mb-4">From the streets of Nairobi to the shores of Dar es Salaam, our movement continues to grow. Every protest, every voice, every donation brings us closer to a future where Gen Z leads the way.</p>
+                    <div class="bg-white rounded p-4 mb-4">
+                        <h5 class="text-primary mb-3"><i class="fas fa-bullhorn me-2"></i>Join the Next Protest</h5>
+                        <p class="text-muted mb-3">Want to participate or need support during an upcoming event? Register with us to get real-time updates and access to our support network.</p>
+                        <a href="events.html" class="btn btn-primary">
+                            View All Events <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="protest-timeline">
+                        <!-- Past: Kenya June 2024 -->
+                        <div class="timeline-item past">
+                            <span class="timeline-date past">June 18, 2024</span>
+                            <h5>Kenya: #RejectFinanceBill2024 Begins</h5>
+                            <p class="text-muted mb-2">Gen Z takes to the streets of Nairobi in historic numbers. The first wave of peaceful protests against the Finance Bill 2024.</p>
+                            <small><i class="fas fa-map-marker-alt text-primary me-1"></i> Nairobi, Kenya</small>
+                            <span class="badge bg-primary ms-2">10,000+ Protesters</span>
+                        </div>
+                        
+                        <!-- Past: Kenya June 25 -->
+                        <div class="timeline-item past">
+                            <span class="timeline-date past">June 25, 2024</span>
+                            <h5>Kenya: Parliament Stormed</h5>
+                            <p class="text-muted mb-2">Historic day as protesters breach parliament grounds. RiseGen provides emergency medical support and legal aid to dozens.</p>
+                            <small><i class="fas fa-map-marker-alt text-primary me-1"></i> Nairobi CBD</small>
+                            <span class="badge bg-danger ms-2">Emergency Response</span>
+                        </div>
+                        
+                        <!-- Past: Kenya July -->
+                        <div class="timeline-item past">
+                            <span class="timeline-date past">July 2024</span>
+                            <h5>Kenya: Victory & Continuation</h5>
+                            <p class="text-muted mb-2">Finance Bill withdrawn. Protests continue for broader accountability. RiseGen expands support network across Kenya.</p>
+                            <small><i class="fas fa-map-marker-alt text-primary me-1"></i> Nationwide Kenya</small>
+                            <span class="badge bg-success ms-2">Bill Rejected</span>
+                        </div>
+                        
+                        <!-- Future: Tanzania December 9 -->
+                        <div class="timeline-item future">
+                            <span class="timeline-date future">December 9, 2024</span>
+                            <h5>Tanzania: Independence Day Rising</h5>
+                            <p class="text-muted mb-2">Tanzanian Gen Z joins the movement on Independence Day. Demanding accountability, transparency, and youth representation.</p>
+                            <small><i class="fas fa-map-marker-alt text-success me-1"></i> Dar es Salaam, Tanzania</small>
+                            <span class="badge bg-success ms-2">Upcoming</span>
+                        </div>
+                        
+                        <!-- Future: Uganda 2025 -->
+                        <div class="timeline-item future">
+                            <span class="timeline-date future">Q1 2025</span>
+                            <h5>Uganda: Movement Expansion</h5>
+                            <p class="text-muted mb-2">Planning underway for Uganda chapter. Building networks with youth activists in Kampala and beyond.</p>
+                            <small><i class="fas fa-map-marker-alt text-warning me-1"></i> Kampala, Uganda</small>
+                            <span class="badge bg-warning text-dark ms-2">Planning</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Protest Timeline Section End -->
+
+    <!-- Recent Events Timeline Section Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5" style="max-width: 600px;">
+                <p class="d-inline-block border rounded-pill py-1 px-4 text-primary">Event Tracker</p>
+                <h2 class="mb-4">Movement Activity</h2>
+                <p class="text-muted">Real-time status of protests and events across East Africa. Events automatically update when completed.</p>
+            </div>
+            
+            <div class="row g-4" id="eventsTimeline">
+                <!-- Events will be dynamically loaded here -->
+                <div class="col-12 text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Recent Events Timeline Section End -->
+
+    <!-- FAQ Section Start -->
+    <div class="container-xxl py-5 bg-light">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="d-inline-block border rounded-pill py-1 px-4 text-primary">FAQs</p>
+                <h2 class="mb-4">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-10 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="accordion" id="contactFAQ">
+                        <div class="accordion-item border-0 mb-3 rounded overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    How quickly can I get help during a protest?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#contactFAQ">
+                                <div class="accordion-body">
+                                    Our emergency response team is available 24/7 during active protests. Call our emergency line or WhatsApp for immediate assistance. For non-urgent matters, we respond within 24 hours.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item border-0 mb-3 rounded overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    How can I volunteer with RiseGen?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#contactFAQ">
+                                <div class="accordion-body">
+                                    We're always looking for volunteers! You can help with medical support (if trained), legal documentation, logistics, social media, or fundraising. Fill out the contact form above and select "I want to volunteer" as your inquiry type.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item border-0 mb-3 rounded overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Is my donation secure and transparent?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#contactFAQ">
+                                <div class="accordion-body">
+                                    Yes! We use secure payment processing and publish regular reports showing exactly how donations are used. Every shilling/dollar is tracked and allocated to specific support categories like medical aid, legal help, and supplies.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item border-0 mb-3 rounded overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    How can I join the Tanzania December 9 protest?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#contactFAQ">
+                                <div class="accordion-body">
+                                    The Tanzania Independence Day protest is being organized locally. Contact us through this form or follow our social media for updates on meeting points, safety guidelines, and how to access our support network on the day.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FAQ Section End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h1 class="fw-bold text-primary mb-4">Care4<span class="text-white">Voices</span></h1>
+                    <p>Support the Voices of Gen Z. A simple, friendly, motivating donations platform for Gen Z protest safety, support, and empowerment.</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square me-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square me-1" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Contact Us</h5>
+                    <p><i class="fab fa-whatsapp me-3"></i>+255 687-799-929</p>
+                    <p><i class="fa fa-envelope me-3"></i>support@risegen.org</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Quick Links</h5>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="events.html">Events</a>
+                    <a class="btn btn-link" href="donate.html">Donate</a>
+                    <a class="btn btn-link" href="">Support</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Newsletter</h5>
+                    <p>Stay updated with our events and impact stories.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a href="#">Care4Voices</a>, All Right Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/parallax/parallax.min.js"></script>
+
+    <!-- Leaflet JS for Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    
+    <!-- Protest Map Script -->
+    <script>
+        // Initialize the map centered on East Africa
+        var map = L.map('protest-map').setView([-3.5, 35], 5);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        // Custom icon for past protests (orange)
+        var pastIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: "<div style='background-color:#FE5D14;' class='marker-pin'></div>",
+            iconSize: [30, 42],
+            iconAnchor: [15, 42],
+            popupAnchor: [0, -35]
+        });
+        
+        // Custom icon for future protests (green)
+        var futureIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: "<div style='background-color:#28a745;' class='marker-pin'></div>",
+            iconSize: [30, 42],
+            iconAnchor: [15, 42],
+            popupAnchor: [0, -35]
+        });
+        
+        // Custom icon for planned (yellow)
+        var plannedIcon = L.divIcon({
+            className: 'custom-div-icon',
+            html: "<div style='background-color:#ffc107;' class='marker-pin'></div>",
+            iconSize: [30, 42],
+            iconAnchor: [15, 42],
+            popupAnchor: [0, -35]
+        });
+        
+        // Style for marker pins
+        var style = document.createElement('style');
+        style.innerHTML = `
+            .marker-pin {
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                border: 3px solid white;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+            }
+            .custom-div-icon {
+                background: transparent;
+                border: none;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Kenya protests (Past - Orange)
+        var kenyaLocations = [
+            { lat: -1.2921, lng: 36.8219, city: "Nairobi", date: "June-July 2024", event: "#RejectFinanceBill2024", status: "past" },
+            { lat: -4.0435, lng: 39.6682, city: "Mombasa", date: "June 2024", event: "Coast Solidarity Protests", status: "past" },
+            { lat: -0.1022, lng: 34.7617, city: "Kisumu", date: "June 2024", event: "Lakeside Rising", status: "past" },
+            { lat: 0.5143, lng: 35.2698, city: "Eldoret", date: "June 2024", event: "Rift Valley Voices", status: "past" }
+        ];
+        
+        // Tanzania protests (Future - Green)
+        var tanzaniaLocations = [
+            { lat: -6.7924, lng: 39.2083, city: "Dar es Salaam", date: "December 9, 2024", event: "Independence Day Rising", status: "future" },
+            { lat: -3.3869, lng: 36.6830, city: "Arusha", date: "December 9, 2024", event: "Northern Solidarity", status: "future" },
+            { lat: -6.1630, lng: 35.7516, city: "Dodoma", date: "December 9, 2024", event: "Capital March", status: "future" }
+        ];
+        
+        // Uganda (Planned - Yellow)
+        var ugandaLocations = [
+            { lat: 0.3476, lng: 32.5825, city: "Kampala", date: "Q1 2025", event: "Movement Expansion", status: "planned" },
+            { lat: 0.0512, lng: 32.4637, city: "Entebbe", date: "Q1 2025", event: "Lake Victoria Voices", status: "planned" }
+        ];
+        
+        // Function to create popup content
+        function createPopup(location) {
+            var statusClass = location.status;
+            var statusText = location.status === 'past' ? 'Completed' : location.status === 'future' ? 'Upcoming' : 'Planned';
+            return `
+                <div class="popup-title">${location.city}</div>
+                <div class="popup-date"><i class="fas fa-calendar-alt me-1"></i>${location.date}</div>
+                <p style="margin: 8px 0; font-size: 0.9rem;">${location.event}</p>
+                <span class="popup-status ${statusClass}">${statusText}</span>
+            `;
+        }
+        
+        // Add Kenya markers
+        kenyaLocations.forEach(function(loc) {
+            L.marker([loc.lat, loc.lng], {icon: pastIcon})
+                .addTo(map)
+                .bindPopup(createPopup(loc));
+        });
+        
+        // Add Tanzania markers
+        tanzaniaLocations.forEach(function(loc) {
+            L.marker([loc.lat, loc.lng], {icon: futureIcon})
+                .addTo(map)
+                .bindPopup(createPopup(loc));
+        });
+        
+        // Add Uganda markers
+        ugandaLocations.forEach(function(loc) {
+            L.marker([loc.lat, loc.lng], {icon: plannedIcon})
+                .addTo(map)
+                .bindPopup(createPopup(loc));
+        });
+        
+        // Add country boundary highlights (approximate polygons)
+        // Kenya - highlighted (past protests)
+        var kenyaStyle = {
+            color: "#FE5D14",
+            weight: 3,
+            opacity: 0.8,
+            fillColor: "#FE5D14",
+            fillOpacity: 0.15
+        };
+        
+        // Tanzania - highlighted (upcoming)
+        var tanzaniaStyle = {
+            color: "#28a745",
+            weight: 3,
+            opacity: 0.8,
+            fillColor: "#28a745",
+            fillOpacity: 0.15
+        };
+        
+        // Uganda - highlighted (planned)
+        var ugandaStyle = {
+            color: "#ffc107",
+            weight: 2,
+            opacity: 0.6,
+            fillColor: "#ffc107",
+            fillOpacity: 0.1
+        };
+        
+        // Simplified country boundaries (approximate)
+        var kenyaBounds = [
+            [-4.7, 33.9], [-4.5, 39.0], [-1.8, 41.9], [4.6, 41.0], 
+            [4.4, 35.9], [1.5, 34.0], [-1.0, 34.0], [-4.7, 33.9]
+        ];
+        
+        var tanzaniaBounds = [
+            [-11.7, 34.5], [-11.5, 40.5], [-10.5, 40.4], [-4.5, 39.5], 
+            [-4.7, 33.9], [-1.0, 30.5], [-2.5, 29.0], [-11.7, 34.5]
+        ];
+        
+        var ugandaBounds = [
+            [4.2, 29.5], [4.0, 35.0], [1.5, 35.0], [-1.5, 29.5], [4.2, 29.5]
+        ];
+        
+        L.polygon(kenyaBounds, kenyaStyle).addTo(map).bindPopup("<strong>Kenya</strong><br>Movement Origin - 2024");
+        L.polygon(tanzaniaBounds, tanzaniaStyle).addTo(map).bindPopup("<strong>Tanzania</strong><br>Upcoming - December 9, 2024");
+        L.polygon(ugandaBounds, ugandaStyle).addTo(map).bindPopup("<strong>Uganda</strong><br>Expansion Planned - 2025");
+    </script>
+    
+    <!-- Auto-Update News & Events Script -->
+    <script>
+        // Configuration
+        const DATA_URL = 'data/events.json';
+        const UPDATE_INTERVAL = 60000; // Check for updates every 60 seconds
+        
+        // Global state
+        let eventsData = null;
+        let countdownInterval = null;
+        
+        // Fetch and render data
+        async function fetchEventsData() {
+            try {
+                const response = await fetch(DATA_URL + '?t=' + Date.now()); // Cache bust
+                if (!response.ok) throw new Error('Failed to fetch');
+                eventsData = await response.json();
+                
+                // Update UI
+                renderNews();
+                renderEvents();
+                updateCountdown();
+                updateLastUpdated();
+                
+            } catch (error) {
+                console.error('Error fetching events data:', error);
+                document.getElementById('newsGrid').innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                        <p class="text-white-50">Unable to load latest updates. Please refresh the page.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Render news cards
+        function renderNews() {
+            const newsGrid = document.getElementById('newsGrid');
+            if (!eventsData || !eventsData.news) return;
+            
+            // Sort by date (newest first) and take top 4
+            const sortedNews = [...eventsData.news].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 4);
+            
+            let html = '';
+            sortedNews.forEach((item, index) => {
+                const date = new Date(item.date);
+                const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                const isFeatured = item.featured ? 'featured' : '';
+                
+                html += `
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="${0.1 * (index + 1)}s">
+                        <div class="news-card ${isFeatured}">
+                            ${item.featured ? '<span class="badge bg-warning text-dark mb-2"><i class="fas fa-star me-1"></i>Featured</span>' : ''}
+                            <span class="news-category ${item.category}">${item.category}</span>
+                            <div class="news-date"><i class="far fa-calendar-alt me-1"></i>${formattedDate}</div>
+                            <h5 class="news-title">${item.title}</h5>
+                            <p class="news-summary">${item.summary}</p>
+                            ${item.link ? `<a href="${item.link}" class="btn btn-sm btn-outline-light mt-2">Read More</a>` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            newsGrid.innerHTML = html;
+        }
+        
+        // Render events timeline
+        function renderEvents() {
+            const timeline = document.getElementById('eventsTimeline');
+            if (!eventsData || !eventsData.events) return;
+            
+            // Auto-update event statuses based on current date
+            const now = new Date();
+            eventsData.events.forEach(event => {
+                const eventDate = new Date(event.endDate || event.date);
+                eventDate.setHours(23, 59, 59); // End of day
+                
+                if (event.status !== 'completed' && eventDate < now) {
+                    event.status = 'completed';
+                    event.autoCompleted = true;
+                }
+            });
+            
+            // Sort: upcoming first, then by date
+            const sortedEvents = [...eventsData.events].sort((a, b) => {
+                const statusOrder = { upcoming: 0, planned: 1, completed: 2 };
+                if (statusOrder[a.status] !== statusOrder[b.status]) {
+                    return statusOrder[a.status] - statusOrder[b.status];
+                }
+                return new Date(a.date) - new Date(b.date);
+            });
+            
+            let html = '';
+            sortedEvents.forEach((event, index) => {
+                const date = new Date(event.date);
+                const formattedDate = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                
+                let statusBadge = '';
+                let statusIcon = '';
+                switch(event.status) {
+                    case 'completed':
+                        statusBadge = '<span class="badge bg-primary">Completed</span>';
+                        statusIcon = '<i class="fas fa-check-circle text-primary"></i>';
+                        break;
+                    case 'upcoming':
+                        statusBadge = '<span class="badge bg-success">Upcoming</span>';
+                        statusIcon = '<i class="fas fa-clock text-success"></i>';
+                        break;
+                    case 'planned':
+                        statusBadge = '<span class="badge bg-warning text-dark">Planned</span>';
+                        statusIcon = '<i class="fas fa-seedling text-warning"></i>';
+                        break;
+                }
+                
+                html += `
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="${0.1 * ((index % 4) + 1)}s">
+                        <div class="event-status-card ${event.status}">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    ${statusIcon}
+                                    <img src="https://flagcdn.com/w40/${event.countryCode.toLowerCase()}.png" alt="${event.country}" style="height: 20px; border-radius: 2px;">
+                                    <span class="fw-bold">${event.country}</span>
+                                </div>
+                                ${statusBadge}
+                            </div>
+                            <h5 class="mb-2">${event.title}</h5>
+                            <p class="text-muted small mb-2">${event.description}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="far fa-calendar me-1"></i>${formattedDate}
+                                    <span class="ms-2"><i class="fas fa-map-marker-alt me-1"></i>${event.city}</span>
+                                </small>
+                                ${event.participants ? `<small class="text-primary fw-bold">${event.participants}</small>` : ''}
+                            </div>
+                            ${event.outcome ? `<div class="mt-2 pt-2 border-top"><small class="text-success"><i class="fas fa-trophy me-1"></i>${event.outcome}</small></div>` : ''}
+                            ${event.autoCompleted ? '<small class="text-muted d-block mt-2"><i class="fas fa-sync-alt me-1"></i>Auto-updated</small>' : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            timeline.innerHTML = html;
+        }
+        
+        // Update countdown timer
+        function updateCountdown() {
+            if (!eventsData || !eventsData.events) return;
+            
+            // Find next upcoming event
+            const now = new Date();
+            const upcomingEvents = eventsData.events
+                .filter(e => e.status === 'upcoming' && new Date(e.date) > now)
+                .sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            if (upcomingEvents.length === 0) {
+                document.getElementById('countdownSection').style.display = 'none';
+                return;
+            }
+            
+            const nextEvent = upcomingEvents[0];
+            document.getElementById('nextEventTitle').textContent = nextEvent.title;
+            document.getElementById('nextEventDesc').textContent = `${nextEvent.city}, ${nextEvent.country} - ${nextEvent.description.substring(0, 100)}...`;
+            
+            // Clear existing interval
+            if (countdownInterval) clearInterval(countdownInterval);
+            
+            // Start countdown
+            const eventDate = new Date(nextEvent.date);
+            eventDate.setHours(8, 0, 0); // Assume 8 AM start
+            
+            function tick() {
+                const now = new Date();
+                const diff = eventDate - now;
+                
+                if (diff <= 0) {
+                    // Event has started - refresh data
+                    fetchEventsData();
+                    return;
+                }
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('countDays').textContent = days.toString().padStart(2, '0');
+                document.getElementById('countHours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('countMinutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('countSeconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            tick();
+            countdownInterval = setInterval(tick, 1000);
+        }
+        
+        // Update last updated timestamp
+        function updateLastUpdated() {
+            if (!eventsData) return;
+            const lastUpdated = new Date(eventsData.lastUpdated);
+            document.getElementById('lastUpdated').textContent = 'Last updated: ' + lastUpdated.toLocaleString();
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchEventsData();
+            
+            // Auto-refresh every minute
+            setInterval(fetchEventsData, UPDATE_INTERVAL);
+        });
+    </script>
+</body>
+
+</html>

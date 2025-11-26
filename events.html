@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Events & Protests | RiseGen - East African Gen Z Movement</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Track all RiseGen protests and events across East Africa. Real-time updates on Kenya, Tanzania, and Uganda movements. Join the Gen Z revolution.">
+    <meta name="keywords" content="TAREHE 9 DESEMBER 2025, WATANZANIA WAOMBOLEZA, MAANDAMANO TANZANIA, GEN Z, MAANDAMANO YA AMANI, MAANDAMANO YA MAPINDUZI YA SIASA TANZANIA, TANZANIA, KENYA, UGANDA, NAPEL, MAANDAMANO MADAGASCAR,  Care4Voices events, East Africa protests, Gen Z protests, Tanzania December 9, Kenya protests, Uganda activism, youth movement events">
+    <meta name="author" content="Care4Voices>
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Events & Protests | RiseGen">
+    <meta property="og:description" content="Track all RiseGen protests and events across East Africa. Real-time updates.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://risegen.org/events.html">
+    <meta property="og:image" content="https://risegen.org/img/og-events.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Events & Protests | RiseGen">
+    <meta name="twitter:description" content="Track all RiseGen protests and events across East Africa. Real-time updates.">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EventSeries",
+        "name": "RiseGen East Africa Protests",
+        "description": "Gen Z-led protests across East Africa demanding accountability and change",
+        "organizer": {
+            "@type": "Organization",
+            "name": "RiseGen",
+            "url": "https://risegen.org"
+        }
+    }
+    </script>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
+
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* Live Status Indicator */
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            animation: pulse-live 2s infinite;
+        }
+        
+        .live-indicator .dot {
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        @keyframes pulse-live {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+        }
+        
+        /* Update Toast */
+        .update-toast {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, #FE5D14, #ff8c42);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(254, 93, 20, 0.3);
+            z-index: 9999;
+            transform: translateX(400px);
+            transition: transform 0.5s ease;
+            max-width: 350px;
+        }
+        
+        .update-toast.show {
+            transform: translateX(0);
+        }
+        
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .filter-tab {
+            padding: 10px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-tab:hover {
+            border-color: #FE5D14;
+            color: #FE5D14;
+        }
+        
+        .filter-tab.active {
+            background: #FE5D14;
+            border-color: #FE5D14;
+            color: white;
+        }
+        
+        .filter-tab .count {
+            background: rgba(0,0,0,0.1);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+        
+        .filter-tab.active .count {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        /* Country Filter */
+        .country-filter {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .country-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .country-btn:hover, .country-btn.active {
+            border-color: #FE5D14;
+            background: #FEF2E9;
+        }
+        
+        .country-btn img {
+            height: 20px;
+            border-radius: 2px;
+        }
+        
+        /* Event Cards */
+        .event-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            height: 100%;
+            position: relative;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+        
+        .event-card.completed {
+            border-left: 5px solid #FE5D14;
+        }
+        
+        .event-card.upcoming {
+            border-left: 5px solid #28a745;
+        }
+        
+        .event-card.planned {
+            border-left: 5px solid #ffc107;
+        }
+        
+        .event-card.live {
+            border-left: 5px solid #dc3545;
+            animation: pulse-card 2s infinite;
+        }
+        
+        @keyframes pulse-card {
+            0%, 100% { box-shadow: 0 5px 30px rgba(220, 53, 69, 0.2); }
+            50% { box-shadow: 0 5px 50px rgba(220, 53, 69, 0.4); }
+        }
+        
+        .event-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            position: relative;
+        }
+        
+        .event-header.completed { background: linear-gradient(135deg, #FE5D14 0%, #ff8c42 100%); }
+        .event-header.upcoming { background: linear-gradient(135deg, #28a745 0%, #20c997 100%); }
+        .event-header.planned { background: linear-gradient(135deg, #ffc107 0%, #ffdb4d 100%); color: #333; }
+        .event-header.live { background: linear-gradient(135deg, #dc3545 0%, #ff6b6b 100%); }
+        
+        .event-status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .event-body {
+            padding: 25px;
+        }
+        
+        .event-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .event-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .event-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .event-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .event-tag {
+            background: #FEF2E9;
+            color: #FE5D14;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .event-outcome {
+            background: #e8f5e9;
+            border-left: 3px solid #28a745;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 15px;
+        }
+        
+        .event-outcome i {
+            color: #28a745;
+        }
+        
+        .event-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            margin-top: 15px;
+        }
+        
+        .event-stat {
+            text-align: center;
+        }
+        
+        .event-stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FE5D14;
+        }
+        
+        .event-stat-label {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+        }
+        
+        /* Timeline View */
+        .timeline-view {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline-view::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #FE5D14, #28a745, #ffc107);
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 25px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #FE5D14;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #FE5D14;
+        }
+        
+        .timeline-item.upcoming::before { background: #28a745; box-shadow: 0 0 0 3px #28a745; }
+        .timeline-item.planned::before { background: #ffc107; box-shadow: 0 0 0 3px #ffc107; }
+        
+        /* Map Section */
+        #eventsMap {
+            height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        
+        .map-legend {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        
+        .legend-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+        
+        .legend-dot.completed { background: #FE5D14; }
+        .legend-dot.upcoming { background: #28a745; }
+        .legend-dot.planned { background: #ffc107; }
+        .legend-dot.live { background: #dc3545; animation: blink 1s infinite; }
+        
+        /* View Toggle */
+        .view-toggle {
+            display: flex;
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 5px;
+        }
+        
+        .view-btn {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .view-btn.active {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            color: #FE5D14;
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #FE5D14;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        
+        /* Search */
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #FE5D14;
+            box-shadow: 0 0 0 4px rgba(254, 93, 20, 0.1);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+        
+        /* Calendar Mini */
+        .upcoming-calendar {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+        }
+        
+        .calendar-event {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .calendar-event:last-child {
+            border-bottom: none;
+        }
+        
+        .calendar-date {
+            width: 60px;
+            height: 60px;
+            background: #FEF2E9;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .calendar-date .day {
+            font-size: 24px;
+            font-weight: 700;
+            color: #FE5D14;
+            line-height: 1;
+        }
+        
+        .calendar-date .month {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+        
+        /* New Event Notification */
+        .new-badge {
+            background: #dc3545;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 5px;
+            animation: pulse-badge 1s infinite;
+        }
+        
+        @keyframes pulse-badge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: 8px;
+        }
+        
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        .skeleton-card {
+            height: 350px;
+            margin-bottom: 20px;
+        }
+        
+        /* Real-time connection status */
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .connection-status.connected .status-dot {
+            background: #28a745;
+        }
+        
+        .connection-status.disconnected .status-dot {
+            background: #dc3545;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ffc107;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Update Toast Notification -->
+    <div class="update-toast" id="updateToast">
+        <div class="d-flex align-items-center gap-3">
+            <i class="fas fa-bell fa-lg"></i>
+            <div>
+                <strong id="toastTitle">New Update!</strong>
+                <p class="mb-0 small" id="toastMessage">Event status has been updated.</p>
+            </div>
+            <button class="btn-close btn-close-white ms-2" onclick="hideToast()"></button>
+        </div>
+    </div>
+
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light p-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="row gx-0 d-none d-lg-flex">
+            <div class="col-lg-7 px-5 text-start">
+                <div class="h-100 d-inline-flex align-items-center py-3 me-4">
+                    <small class="fa fa-map-marker-alt text-primary me-2"></small>
+                    
+                </div>
+                <div class="h-100 d-inline-flex align-items-center py-3">
+                    <small class="far fa-clock text-primary me-2"></small>
+                    <small>24/7 Emergency Support Active</small>
+                </div>
+            </div>
+            <div class="col-lg-5 px-5 text-end">
+                <div class="h-100 d-inline-flex align-items-center py-3 me-4">
+                    <small class="fa fa-phone-alt text-primary me-2"></small>
+                    <small>Whatsapp +255 687-799-929</small>
+                </div>
+                <div class="h-100 d-inline-flex align-items-center">
+                    <a href="www.facebook.com/profile.php?id=61584128285656" class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-0" href=""><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5" style="background-color: #001D23; margin: auto; padding: 13px;">
+            <h1 class="m-0 text-primary"><i class="far fa-hand-rock me-3"></i>Care4Voices</h1>
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div style="background-color: #001D23" class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="events.html" class="nav-item nav-link active">Events</a>
+                <a href="donate.html" class="nav-item nav-link">Donate</a>
+                <a href="video.html" class="dropdown-item">Videos</a>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            <a href="login.html" class="btn btn-outline-primary rounded-pill py-2 px-4 me-3 d-none d-lg-block">Login</a>
+            <a href="donate.html" class="btn btn-primary rounded-pill py-2 px-4 me-5 d-none d-lg-block">Support Us<i class="fa fa-arrow-right ms-2"></i></a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Events & Protests</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb text-uppercase mb-0">
+                    <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page">Events</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Live Status Bar -->
+    <div class="container-xxl">
+        <div class="container">
+            <div class="stats-bar wow fadeInUp">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 col-md-6 mb-3 mb-lg-0">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="live-indicator">
+                                <span class="dot"></span>
+                                LIVE UPDATES
+                            </div>
+                            <div class="connection-status connected" id="connectionStatus">
+                                <span class="status-dot"></span>
+                                <span id="connectionText">Connected</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="stat-item">
+                                    <div class="stat-number" id="statTotal">-</div>
+                                    <div class="stat-label">Total Events</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="stat-item">
+                                    <div class="stat-number" id="statCompleted">-</div>
+                                    <div class="stat-label">Completed</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="stat-item">
+                                    <div class="stat-number" id="statUpcoming">-</div>
+                                    <div class="stat-label">Upcoming</div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="stat-item">
+                                    <div class="stat-number" id="statCountries">-</div>
+                                    <div class="stat-label">Countries</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters & Controls -->
+    <div class="container-xxl py-4">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <!-- Search -->
+                <div class="col-lg-4">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search events, locations...">
+                    </div>
+                </div>
+                
+                <!-- View Toggle -->
+                <div class="col-lg-3">
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid" onclick="setView('grid')">
+                            <i class="fas fa-th-large me-2"></i>Grid
+                        </button>
+                        <button class="view-btn" data-view="timeline" onclick="setView('timeline')">
+                            <i class="fas fa-stream me-2"></i>Timeline
+                        </button>
+                        <button class="view-btn" data-view="map" onclick="setView('map')">
+                            <i class="fas fa-map me-2"></i>Map
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Last Updated -->
+                <div class="col-lg-5 text-lg-end">
+                    <small class="text-muted">
+                        <i class="fas fa-sync-alt me-1"></i>
+                        Last updated: <span id="lastUpdated">Loading...</span>
+                        <button class="btn btn-sm btn-outline-primary ms-2" onclick="refreshData()">
+                            <i class="fas fa-refresh"></i>
+                        </button>
+                    </small>
+                </div>
+            </div>
+            
+            <!-- Status Filters -->
+            <div class="filter-tabs mt-4" id="statusFilters">
+                <button class="filter-tab active" data-filter="all" onclick="setFilter('all')">
+                    All Events <span class="count" id="countAll">0</span>
+                </button>
+                <button class="filter-tab" data-filter="live" onclick="setFilter('live')">
+                    <i class="fas fa-circle text-danger me-1" style="font-size: 8px;"></i>
+                    Live Now <span class="count" id="countLive">0</span>
+                </button>
+                <button class="filter-tab" data-filter="upcoming" onclick="setFilter('upcoming')">
+                    Upcoming <span class="count" id="countUpcoming">0</span>
+                </button>
+                <button class="filter-tab" data-filter="completed" onclick="setFilter('completed')">
+                    Completed <span class="count" id="countCompleted">0</span>
+                </button>
+                <button class="filter-tab" data-filter="planned" onclick="setFilter('planned')">
+                    Planned <span class="count" id="countPlanned">0</span>
+                </button>
+            </div>
+            
+            <!-- Country Filters -->
+            <div class="country-filter" id="countryFilters">
+                <button class="country-btn active" data-country="all" onclick="setCountryFilter('all')">
+                    <i class="fas fa-globe-africa"></i> All Countries
+                </button>
+                <button class="country-btn" data-country="KE" onclick="setCountryFilter('KE')">
+                    <img src="https://flagcdn.com/w40/ke.png" alt="Kenya"> Kenya
+                </button>
+                <button class="country-btn" data-country="TZ" onclick="setCountryFilter('TZ')">
+                    <img src="https://flagcdn.com/w40/tz.png" alt="Tanzania"> Tanzania
+                </button>
+                <button class="country-btn" data-country="UG" onclick="setCountryFilter('UG')">
+                    <img src="https://flagcdn.com/w40/ug.png" alt="Uganda"> Uganda
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Events Grid View -->
+    <div class="container-xxl py-5" id="gridView">
+        <div class="container">
+            <div class="row g-4" id="eventsGrid">
+                <!-- Events will be dynamically loaded here -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="skeleton skeleton-card"></div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="skeleton skeleton-card"></div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="skeleton skeleton-card"></div>
+                </div>
+            </div>
+            
+            <!-- No Results -->
+            <div class="text-center py-5 d-none" id="noResults">
+                <i class="fas fa-search fa-4x text-muted mb-3"></i>
+                <h4>No events found</h4>
+                <p class="text-muted">Try adjusting your filters or search terms.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Timeline View (Hidden by default) -->
+    <div class="container-xxl py-5 d-none" id="timelineView">
+        <div class="container">
+            <div class="timeline-view" id="eventsTimeline">
+                <!-- Timeline items will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Map View (Hidden by default) -->
+    <div class="container-xxl py-5 d-none" id="mapView">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-9">
+                    <div id="eventsMap"></div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="map-legend mb-4">
+                        <h6 class="mb-3"><i class="fas fa-info-circle me-2"></i>Map Legend</h6>
+                        <div class="legend-item">
+                            <span class="legend-dot live"></span>
+                            <span>Live Now</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot upcoming"></span>
+                            <span>Upcoming</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot completed"></span>
+                            <span>Completed</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot planned"></span>
+                            <span>Planned</span>
+                        </div>
+                    </div>
+                    
+                    <div class="upcoming-calendar">
+                        <h6 class="mb-3"><i class="fas fa-calendar-alt me-2 text-primary"></i>Upcoming Events</h6>
+                        <div id="upcomingList">
+                            <!-- Upcoming events will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Event CTA Section -->
+    <div class="container-xxl py-5 bg-light">
+        <div class="container">
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-8">
+                    <h3 class="mb-3">Organizing a Protest or Event?</h3>
+                    <p class="text-muted mb-0">Care4Voices can provide support including medical teams, legal observers, safety supplies, and coordination. Let us help you stay safe.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a href="contact.html" class="btn btn-primary rounded-pill py-3 px-5">
+                        Request Support <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h1 class="fw-bold text-primary mb-4">Care4<span class="text-white">Voices</span></h1>
+                    <p>Support the Voices of Gen Z. A simple, friendly, motivating donations platform for Gen Z protest safety, support, and empowerment.</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square me-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square me-1" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Contact Us</h5>
+                    <p><i class="fab fa-whatsapp me-3"></i>+255 687-799-929</p>
+                    <p><i class="fa fa-envelope me-3"></i>support@risegen.org</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Quick Links</h5>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="events.html">Events</a>
+                    <a class="btn btn-link" href="donate.html">Donate</a>
+                    <a class="btn btn-link" href="">Support</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Newsletter</h5>
+                    <p>Stay updated with our events and impact stories.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a href="#">Care4Voices</a>, All Right Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    
+    <!-- Leaflet Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- Real-Time Events System -->
+    <script>
+        // Configuration
+        const CONFIG = {
+            dataUrl: 'data/events.json',
+            updateInterval: 30000, // Check every 30 seconds
+            simulateRealTime: true // Simulate real-time updates for demo
+        };
+
+        // Global State
+        let eventsData = null;
+        let currentView = 'grid';
+        let currentFilter = 'all';
+        let currentCountry = 'all';
+        let searchQuery = '';
+        let map = null;
+        let markers = [];
+        let updateTimer = null;
+        let isConnected = true;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initApp();
+        });
+
+        async function initApp() {
+            // Set footer year
+            document.getElementById('footerYear').textContent = new Date().getFullYear();
+            
+            // Initialize map (hidden)
+            initMap();
+            
+            // Fetch initial data
+            await fetchData();
+            
+            // Start real-time updates
+            startRealTimeUpdates();
+            
+            // Setup search
+            document.getElementById('searchInput').addEventListener('input', debounce(handleSearch, 300));
+        }
+
+        // Fetch data from JSON
+        async function fetchData() {
+            try {
+                const response = await fetch(CONFIG.dataUrl + '?t=' + Date.now());
+                if (!response.ok) throw new Error('Network error');
+                
+                const data = await response.json();
+                
+                // Auto-update event statuses based on current time
+                processEventStatuses(data.events);
+                
+                // Check for changes
+                const hasChanges = detectChanges(data);
+                
+                eventsData = data;
+                
+                // Update UI
+                updateStats();
+                renderEvents();
+                updateLastUpdated();
+                setConnectionStatus(true);
+                
+                // Show notification if changes detected
+                if (hasChanges) {
+                    showToast('Events Updated', 'New event information is now available.');
+                }
+                
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setConnectionStatus(false);
+            }
+        }
+
+        // Process event statuses based on current date/time
+        function processEventStatuses(events) {
+            const now = new Date();
+            
+            events.forEach(event => {
+                const startDate = new Date(event.date);
+                const endDate = new Date(event.endDate || event.date);
+                
+                // Set start time to 8 AM
+                startDate.setHours(8, 0, 0);
+                // Set end time to 6 PM
+                endDate.setHours(18, 0, 0);
+                
+                // Check if event is currently live
+                if (now >= startDate && now <= endDate && event.status !== 'completed') {
+                    if (event.status !== 'live') {
+                        event.status = 'live';
+                        event.statusChanged = true;
+                    }
+                }
+                // Check if event has ended
+                else if (now > endDate && event.status !== 'completed') {
+                    event.status = 'completed';
+                    event.autoCompleted = true;
+                    event.statusChanged = true;
+                }
+            });
+        }
+
+        // Detect changes from previous data
+        function detectChanges(newData) {
+            if (!eventsData) return false;
+            
+            // Check if any event status changed
+            const hasStatusChange = newData.events.some(event => event.statusChanged);
+            
+            // Check if new events added
+            const newEventIds = newData.events.map(e => e.id);
+            const oldEventIds = eventsData.events.map(e => e.id);
+            const hasNewEvents = newEventIds.some(id => !oldEventIds.includes(id));
+            
+            return hasStatusChange || hasNewEvents;
+        }
+
+        // Real-time update system
+        function startRealTimeUpdates() {
+            // Clear existing timer
+            if (updateTimer) clearInterval(updateTimer);
+            
+            // Start periodic updates
+            updateTimer = setInterval(async () => {
+                await fetchData();
+                
+                // Simulate real-time changes for demo
+                if (CONFIG.simulateRealTime) {
+                    simulateRealTimeChanges();
+                }
+            }, CONFIG.updateInterval);
+        }
+
+        // Simulate real-time changes (for demo purposes)
+        function simulateRealTimeChanges() {
+            // This would be replaced with WebSocket or Server-Sent Events in production
+            const now = new Date();
+            
+            eventsData.events.forEach(event => {
+                const eventDate = new Date(event.date);
+                
+                // If an event is happening today, simulate participant updates
+                if (event.status === 'live' && Math.random() > 0.7) {
+                    const currentParticipants = parseInt(event.participants?.replace(/[^0-9]/g, '') || '0');
+                    const increase = Math.floor(Math.random() * 500) + 100;
+                    event.participants = (currentParticipants + increase).toLocaleString() + '+';
+                    event.lastUpdate = now.toISOString();
+                    
+                    showToast('Live Update', `${event.title}: Now ${event.participants} participants!`);
+                    renderEvents();
+                }
+            });
+        }
+
+        // Update statistics
+        function updateStats() {
+            if (!eventsData) return;
+            
+            const events = eventsData.events;
+            const stats = {
+                total: events.length,
+                completed: events.filter(e => e.status === 'completed').length,
+                upcoming: events.filter(e => e.status === 'upcoming' || e.status === 'live').length,
+                countries: [...new Set(events.map(e => e.countryCode))].length
+            };
+            
+            document.getElementById('statTotal').textContent = stats.total;
+            document.getElementById('statCompleted').textContent = stats.completed;
+            document.getElementById('statUpcoming').textContent = stats.upcoming;
+            document.getElementById('statCountries').textContent = stats.countries;
+            
+            // Update filter counts
+            document.getElementById('countAll').textContent = events.length;
+            document.getElementById('countLive').textContent = events.filter(e => e.status === 'live').length;
+            document.getElementById('countUpcoming').textContent = events.filter(e => e.status === 'upcoming').length;
+            document.getElementById('countCompleted').textContent = events.filter(e => e.status === 'completed').length;
+            document.getElementById('countPlanned').textContent = events.filter(e => e.status === 'planned').length;
+        }
+
+        // Get filtered events
+        function getFilteredEvents() {
+            if (!eventsData) return [];
+            
+            let events = [...eventsData.events];
+            
+            // Filter by status
+            if (currentFilter !== 'all') {
+                events = events.filter(e => e.status === currentFilter);
+            }
+            
+            // Filter by country
+            if (currentCountry !== 'all') {
+                events = events.filter(e => e.countryCode === currentCountry);
+            }
+            
+            // Filter by search query
+            if (searchQuery) {
+                const query = searchQuery.toLowerCase();
+                events = events.filter(e => 
+                    e.title.toLowerCase().includes(query) ||
+                    e.description.toLowerCase().includes(query) ||
+                    e.city.toLowerCase().includes(query) ||
+                    e.country.toLowerCase().includes(query) ||
+                    (e.hashtags && e.hashtags.some(tag => tag.toLowerCase().includes(query)))
+                );
+            }
+            
+            // Sort: live first, then upcoming, then by date
+            events.sort((a, b) => {
+                const statusOrder = { live: 0, upcoming: 1, planned: 2, completed: 3 };
+                if (statusOrder[a.status] !== statusOrder[b.status]) {
+                    return statusOrder[a.status] - statusOrder[b.status];
+                }
+                return new Date(b.date) - new Date(a.date);
+            });
+            
+            return events;
+        }
+
+        // Render events based on current view
+        function renderEvents() {
+            const events = getFilteredEvents();
+            
+            // Show/hide no results
+            document.getElementById('noResults').classList.toggle('d-none', events.length > 0);
+            
+            switch (currentView) {
+                case 'grid':
+                    renderGridView(events);
+                    break;
+                case 'timeline':
+                    renderTimelineView(events);
+                    break;
+                case 'map':
+                    renderMapView(events);
+                    break;
+            }
+        }
+
+        // Grid View
+        function renderGridView(events) {
+            const container = document.getElementById('eventsGrid');
+            
+            if (events.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+            
+            let html = '';
+            events.forEach((event, index) => {
+                const date = new Date(event.date);
+                const formattedDate = date.toLocaleDateString('en-US', { 
+                    weekday: 'short', 
+                    month: 'short', 
+                    day: 'numeric', 
+                    year: 'numeric' 
+                });
+                
+                const isNew = event.statusChanged || (new Date() - new Date(event.lastUpdate || event.date)) < 3600000;
+                
+                html += `
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="${0.1 * ((index % 3) + 1)}s">
+                        <div class="event-card ${event.status}">
+                            <div class="event-header ${event.status}">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <img src="https://flagcdn.com/w40/${event.countryCode.toLowerCase()}.png" alt="${event.country}" style="height: 20px; border-radius: 3px;">
+                                    <span class="fw-bold">${event.country}</span>
+                                    ${isNew ? '<span class="new-badge">NEW</span>' : ''}
+                                </div>
+                                <h5 class="mb-0">${event.title}</h5>
+                                <span class="event-status-badge">${event.status === 'live' ? '<i class="fas fa-circle text-danger me-1" style="font-size:8px;animation:blink 1s infinite"></i>' : ''}${event.status.toUpperCase()}</span>
+                            </div>
+                            <div class="event-body">
+                                <div class="event-meta">
+                                    <span><i class="far fa-calendar"></i>${formattedDate}</span>
+                                    <span><i class="fas fa-map-marker-alt"></i>${event.city}</span>
+                                </div>
+                                <p class="event-description">${event.description}</p>
+                                
+                                ${event.hashtags ? `
+                                    <div class="event-tags">
+                                        ${event.hashtags.slice(0, 3).map(tag => `<span class="event-tag">${tag}</span>`).join('')}
+                                    </div>
+                                ` : ''}
+                                
+                                ${event.participants ? `
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <i class="fas fa-users text-primary"></i>
+                                        <strong>${event.participants}</strong> participants
+                                        ${event.status === 'live' ? '<span class="badge bg-danger ms-2">LIVE</span>' : ''}
+                                    </div>
+                                ` : ''}
+                                
+                                ${event.outcome ? `
+                                    <div class="event-outcome">
+                                        <i class="fas fa-trophy me-2"></i>
+                                        <strong>Outcome:</strong> ${event.outcome}
+                                    </div>
+                                ` : ''}
+                                
+                                ${event.casualties ? `
+                                    <div class="event-stats">
+                                        <div class="event-stat">
+                                            <div class="event-stat-value">${event.casualties.supported}</div>
+                                            <div class="event-stat-label">Supported</div>
+                                        </div>
+                                        <div class="event-stat">
+                                            <div class="event-stat-value">${event.casualties.injured}</div>
+                                            <div class="event-stat-label">Injured</div>
+                                        </div>
+                                        <div class="event-stat">
+                                            <div class="event-stat-value">${event.casualties.arrested}</div>
+                                            <div class="event-stat-label">Arrested</div>
+                                        </div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${event.meetingPoints ? `
+                                    <div class="mt-3 pt-3 border-top">
+                                        <small class="text-muted d-block mb-2"><i class="fas fa-map-pin me-1"></i>Meeting Points:</small>
+                                        ${event.meetingPoints.map(mp => `
+                                            <span class="badge bg-light text-dark me-1 mb-1">${mp.name} @ ${mp.time}</span>
+                                        `).join('')}
+                                    </div>
+                                ` : ''}
+                                
+                                ${event.autoCompleted ? `
+                                    <small class="text-muted d-block mt-2">
+                                        <i class="fas fa-check-circle text-success me-1"></i>Auto-updated to completed
+                                    </small>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Timeline View
+        function renderTimelineView(events) {
+            const container = document.getElementById('eventsTimeline');
+            
+            // Sort by date for timeline
+            const sortedEvents = [...events].sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            let html = '';
+            sortedEvents.forEach(event => {
+                const date = new Date(event.date);
+                const formattedDate = date.toLocaleDateString('en-US', { 
+                    month: 'long', 
+                    day: 'numeric', 
+                    year: 'numeric' 
+                });
+                
+                html += `
+                    <div class="timeline-item ${event.status}">
+                        <div class="event-card ${event.status}">
+                            <div class="event-header ${event.status}">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <small class="opacity-75">${formattedDate}</small>
+                                        <h5 class="mb-0 mt-1">${event.title}</h5>
+                                    </div>
+                                    <span class="badge bg-white bg-opacity-25">${event.status.toUpperCase()}</span>
+                                </div>
+                            </div>
+                            <div class="event-body">
+                                <div class="d-flex align-items-center gap-3 mb-3">
+                                    <img src="https://flagcdn.com/w40/${event.countryCode.toLowerCase()}.png" alt="${event.country}" style="height: 20px;">
+                                    <span>${event.city}, ${event.country}</span>
+                                    ${event.participants ? `<span class="badge bg-primary">${event.participants}</span>` : ''}
+                                </div>
+                                <p class="text-muted">${event.description}</p>
+                                ${event.outcome ? `<div class="alert alert-success py-2"><i class="fas fa-trophy me-2"></i>${event.outcome}</div>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Map View
+        function initMap() {
+            map = L.map('eventsMap').setView([-2.5, 36], 5);
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+        }
+
+        function renderMapView(events) {
+            // Clear existing markers
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+            
+            // Add markers for each event
+            events.forEach(event => {
+                if (!event.coordinates) return;
+                
+                const color = {
+                    live: '#dc3545',
+                    upcoming: '#28a745',
+                    completed: '#FE5D14',
+                    planned: '#ffc107'
+                }[event.status];
+                
+                const icon = L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div style="background: ${color}; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 10px rgba(0,0,0,0.3);${event.status === 'live' ? 'animation: blink 1s infinite;' : ''}"></div>`,
+                    iconSize: [20, 20]
+                });
+                
+                const marker = L.marker(event.coordinates, { icon }).addTo(map);
+                
+                const popup = `
+                    <div style="min-width: 200px;">
+                        <h6 class="mb-2">${event.title}</h6>
+                        <p class="small mb-2">${event.city}, ${event.country}</p>
+                        <span class="badge" style="background: ${color}; color: white;">${event.status.toUpperCase()}</span>
+                        ${event.participants ? `<p class="small mt-2 mb-0"><strong>${event.participants}</strong> participants</p>` : ''}
+                    </div>
+                `;
+                
+                marker.bindPopup(popup);
+                markers.push(marker);
+            });
+            
+            // Update upcoming list
+            const upcomingList = document.getElementById('upcomingList');
+            const upcoming = events.filter(e => e.status === 'upcoming' || e.status === 'live').slice(0, 5);
+            
+            upcomingList.innerHTML = upcoming.map(event => {
+                const date = new Date(event.date);
+                return `
+                    <div class="calendar-event">
+                        <div class="calendar-date">
+                            <span class="day">${date.getDate()}</span>
+                            <span class="month">${date.toLocaleDateString('en-US', { month: 'short' })}</span>
+                        </div>
+                        <div>
+                            <h6 class="mb-1" style="font-size: 14px;">${event.title}</h6>
+                            <small class="text-muted">${event.city}, ${event.country}</small>
+                        </div>
+                    </div>
+                `;
+            }).join('') || '<p class="text-muted small">No upcoming events</p>';
+            
+            // Fit bounds if markers exist
+            if (markers.length > 0) {
+                const group = L.featureGroup(markers);
+                map.fitBounds(group.getBounds().pad(0.1));
+            }
+        }
+
+        // View switching
+        function setView(view) {
+            currentView = view;
+            
+            // Update buttons
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.view === view);
+            });
+            
+            // Show/hide views
+            document.getElementById('gridView').classList.toggle('d-none', view !== 'grid');
+            document.getElementById('timelineView').classList.toggle('d-none', view !== 'timeline');
+            document.getElementById('mapView').classList.toggle('d-none', view !== 'map');
+            
+            // Re-render
+            renderEvents();
+            
+            // Invalidate map size if switching to map view
+            if (view === 'map' && map) {
+                setTimeout(() => map.invalidateSize(), 100);
+            }
+        }
+
+        // Filter functions
+        function setFilter(filter) {
+            currentFilter = filter;
+            
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.filter === filter);
+            });
+            
+            renderEvents();
+        }
+
+        function setCountryFilter(country) {
+            currentCountry = country;
+            
+            document.querySelectorAll('.country-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.country === country);
+            });
+            
+            renderEvents();
+        }
+
+        function handleSearch(e) {
+            searchQuery = e.target.value;
+            renderEvents();
+        }
+
+        // Refresh data manually
+        function refreshData() {
+            const btn = event.target.closest('button');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            
+            fetchData().then(() => {
+                btn.innerHTML = '<i class="fas fa-refresh"></i>';
+            });
+        }
+
+        // Toast notification
+        function showToast(title, message) {
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMessage').textContent = message;
+            document.getElementById('updateToast').classList.add('show');
+            
+            setTimeout(hideToast, 5000);
+        }
+
+        function hideToast() {
+            document.getElementById('updateToast').classList.remove('show');
+        }
+
+        // Connection status
+        function setConnectionStatus(connected) {
+            isConnected = connected;
+            const status = document.getElementById('connectionStatus');
+            const text = document.getElementById('connectionText');
+            
+            status.classList.toggle('connected', connected);
+            status.classList.toggle('disconnected', !connected);
+            text.textContent = connected ? 'Connected' : 'Disconnected';
+        }
+
+        // Update last updated timestamp
+        function updateLastUpdated() {
+            const now = new Date();
+            document.getElementById('lastUpdated').textContent = now.toLocaleString();
+        }
+
+        // Debounce utility
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    </script>
+</body>
+</html>

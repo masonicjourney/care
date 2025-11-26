@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard | Care4Voices</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Care4Voices User Dashboard - Track protests, connect with community, and make an impact">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, collection, getDocs, query, orderBy, limit, addDoc, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        
+        // Your Firebase configuration - Replace with your actual config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBKg1HRMQ9HhRW0BTIObYe_DEAZYyuPXxo",
+            authDomain: "care4voices-a7e82.firebaseapp.com",
+            projectId: "care4voices-a7e82",
+            storageBucket: "care4voices-a7e82.firebasestorage.app",
+            messagingSenderId: "1082810236372",
+            appId: "1:1082810236372:web:ffef92c5fa3416e2ef6a41"
+ 
+        };
+
+        // Initialize Firebase
+        let app, auth, db;
+        let firebaseInitialized = false;
+        
+        try {
+            if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_API_KEY") {
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                firebaseInitialized = true;
+                
+                // Make available globally
+                window.firebaseAuth = auth;
+                window.firebaseDb = db;
+                window.firebaseSignOut = signOut;
+                window.firebaseOnAuthStateChanged = onAuthStateChanged;
+                window.firebaseDoc = doc;
+                window.firebaseGetDoc = getDoc;
+                window.firebaseCollection = collection;
+                window.firebaseGetDocs = getDocs;
+                window.firebaseQuery = query;
+                window.firebaseOrderBy = orderBy;
+                window.firebaseLimit = limit;
+                window.firebaseAddDoc = addDoc;
+                window.firebaseOnSnapshot = onSnapshot;
+                window.firebaseServerTimestamp = serverTimestamp;
+            } else {
+                console.log('[v0] Firebase not configured - using demo mode');
+            }
+        } catch (error) {
+            console.error('[v0] Firebase init error:', error);
+        }
+    </script>
+
+    <style>
+        :root {
+            --primary: #FE5D14;
+            --secondary: #FFF0E6;
+            --dark: #121416;
+            --light: #F8F9FA;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Saira', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: #e54d08;
+            border-color: #e54d08;
+        }
+
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .text-primary {
+            color: var(--primary) !important;
+        }
+
+        .bg-primary {
+            background-color: var(--primary) !important;
+        }
+
+        .bg-secondary {
+            background-color: var(--secondary) !important;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            height: 45px;
+            background: var(--dark);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: var(--dark);
+        }
+
+        .navbar-brand h1 {
+            font-size: 2rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.75) !important;
+            padding: 25px 15px !important;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary) !important;
+        }
+
+        /* Dashboard Layout */
+        .dashboard-container {
+            padding-top: 120px;
+            min-height: 100vh;
+        }
+
+        /* Stats Cards */
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* Map Section */
+        .map-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .map-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .map-container svg {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Country styling */
+        .country {
+            fill: #e0e0e0;
+            stroke: #fff;
+            stroke-width: 0.5;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .country:hover {
+            fill: #bdbdbd;
+        }
+
+        .country.active-protest {
+            fill: var(--primary);
+        }
+
+        .country.active-protest:hover {
+            fill: #e54d08;
+        }
+
+        .country.past-protest {
+            fill: #FFB380;
+        }
+
+        .country.past-protest:hover {
+            fill: #ff9955;
+        }
+
+        /* Map Legend */
+        .map-legend {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        /* Country Tooltip */
+        .country-tooltip {
+            position: absolute;
+            background: var(--dark);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 100;
+            white-space: nowrap;
+        }
+
+        .country-tooltip.show {
+            opacity: 1;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: none;
+            width: 100%;
+            text-align: left;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .action-btn:last-child {
+            margin-bottom: 0;
+        }
+
+        .action-btn i {
+            font-size: 20px;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .whatsapp-btn:hover {
+            background: #1da851;
+            color: white;
+        }
+
+        /* Recent Activity */
+        .activity-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .activity-content h6 {
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .activity-content p {
+            margin-bottom: 0;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        /* User Profile */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            overflow: hidden;
+        }
+
+        /* Added user avatar image styles */
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Profile Card Styles */
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Added Live Chat Styles */
+        .live-chat-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            margin-bottom: 20px; /* Added margin-bottom to match profile-card margin-bottom */
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #e54d0a 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header h5 {
+            margin: 0;
+            font-family: 'Saira', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .chat-header .online-users {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .chat-header .online-dot {
+            width: 8px;
+            height: 8px;
+            background: #25D366;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 3px;
+        }
+
+        .chat-message {
+            display: flex;
+            gap: 10px;
+            max-width: 85%;
+        }
+
+        .chat-message.own-message {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .chat-message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .chat-message-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .chat-message-content {
+            background: white;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border-top-left-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .chat-message.own-message .chat-message-content {
+            background: var(--primary);
+            color: white;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 4px;
+        }
+
+        .chat-message-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 3px;
+        }
+
+        .chat-message.own-message .chat-message-name {
+            color: rgba(255, 255, 255, 0.85);
+            text-align: right;
+        }
+
+        .chat-message-text {
+            font-size: 14px;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .chat-message-time {
+            font-size: 10px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .chat-message.own-message .chat-message-time {
+            color: rgba(255, 255, 255, 0.7);
+            text-align: right;
+        }
+
+        .chat-input-container {
+            padding: 12px 15px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input {
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 10px 16px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+        }
+
+        .chat-send-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: none;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .chat-send-btn:hover {
+            background: #e54d0a;
+            transform: scale(1.05);
+        }
+
+        .chat-send-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .chat-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .chat-empty i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+        .chat-typing {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .chat-typing-dots {
+            display: flex;
+            gap: 3px;
+        }
+
+        .chat-typing-dots span {
+            width: 6px;
+            height: 6px;
+            background: #999;
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite;
+        }
+
+        .chat-typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .chat-typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-4px); }
+        }
+
+        .profile-avatar-large {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid var(--primary);
+            overflow: hidden;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .profile-avatar-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-avatar-large .avatar-placeholder {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .profile-avatar-large .online-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            background: #28a745;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .profile-role {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .profile-location {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .profile-location i {
+            margin-right: 5px;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .profile-stat {
+            text-align: center;
+        }
+
+        .profile-stat-number {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .profile-stat-label {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .edit-profile-btn {
+            margin-top: 20px;
+        }
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff8a50 100%);
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .welcome-banner h2 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+
+        .spinner-grow {
+            background-color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding-top: 80px;
+            }
+
+            .stat-card {
+                margin-bottom: 15px;
+            }
+
+            .map-container {
+                max-width: 100%;
+            }
+
+            .profile-avatar-large {
+                width: 100px;
+                height: 100px;
+            }
+
+            .profile-avatar-large .avatar-placeholder {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid fixed-top px-0">
+        <div class="top-bar text-white-50 row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+                <small id="user-location"><i class="fa fa-map-marker-alt me-2"></i>Welcome back!</small>
+            </div>
+            <div class="col-lg-6 px-5 text-end">
+                <small>Follow us:</small>
+                <a class="text-white-50 ms-3" href="#"><i class="fab fa-facebook-f"></i></a>
+                <a class="text-white-50 ms-3" href="#"><i class="fab fa-twitter"></i></a>
+                <a class="text-white-50 ms-3" href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a class="text-white-50 ms-3" href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-dark py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+                <h1 class="fw-bold text-primary m-0">Care4<span class="text-white">Voices</span></h1>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="causes.html" class="nav-item nav-link">Causes</a>
+                    <a href="video.html" class="dropdown-item">Videos</a>
+                    <a href="dashboard.html" class="nav-item nav-link active">Dashboard</a>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                </div>
+                <div class="d-none d-lg-flex ms-2 align-items-center">
+                    <div class="user-profile me-3">
+                        <!-- Updated user avatar to support image -->
+                        <div class="user-avatar" id="user-avatar">
+                            <span id="user-avatar-text">U</span>
+                            <img id="user-avatar-img" src="/placeholder.svg" alt="Profile" style="display: none;">
+                        </div>
+                        <span class="text-white" id="user-name">User</span>
+                    </div>
+                    <button class="btn btn-outline-primary py-2 px-3" onclick="handleLogout()">
+                        Logout
+                        <div class="d-inline-flex btn-sm-square bg-white text-primary rounded-circle ms-2">
+                            <i class="fa fa-sign-out-alt"></i>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <div class="container py-4">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2 id="welcome-message">Welcome back!</h2>
+                        <p class="mb-0 opacity-75">Track protests, connect with your community, and make a difference.</p>
+                    </div>
+                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                        <a href="donate.html" class="btn btn-light text-primary px-4 py-2">
+                            <i class="fa fa-heart me-2"></i>Donate Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile and Stats Row -->
+            <div class="row g-4 mb-4">
+                <!-- Profile Card -->
+                <div class="col-lg-3">
+                    <div class="profile-card">
+                        <div class="profile-avatar-large">
+                            <span class="avatar-placeholder" id="profile-avatar-text">U</span>
+                            <img id="profile-avatar-img" src="/placeholder.svg" alt="Profile" style="display: none;">
+                            <div class="online-badge"></div>
+                        </div>
+                        <h4 class="profile-name" id="profile-name">User Name</h4>
+                        <p class="profile-role" id="profile-role">Community Member</p>
+                        <p class="profile-location" id="profile-location-text">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Location</span>
+                        </p>
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <div class="profile-stat-number" id="profile-causes">0</div>
+                                <div class="profile-stat-label">Causes</div>
+                            </div>
+                            <div class="profile-stat">
+                                <div class="profile-stat-number" id="profile-joined">0</div>
+                                <div class="profile-stat-label">Days Active</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-primary btn-sm edit-profile-btn" onclick="editProfile()">
+                            <i class="fas fa-edit me-1"></i>Edit Profile
+                        </button>
+                    </div>
+
+                    <!-- Live Group Chat Card -->
+                    <div class="live-chat-card">
+                        <div class="chat-header">
+                            <h5><i class="fas fa-comments me-2"></i>Community Chat</h5>
+                            <div class="online-users">
+                                <span class="online-dot"></span>
+                                <span id="online-count">Live</span>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="chat-empty">
+                                <i class="fas fa-comments"></i>
+                                <p>No messages yet.<br>Start the conversation!</p>
+                            </div>
+                        </div>
+                        <div class="chat-input-container">
+                            <input type="text" class="chat-input" id="chat-input" placeholder="Type a message..." maxlength="500">
+                            <button class="chat-send-btn" id="chat-send-btn" onclick="sendChatMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="col-lg-9">
+                    <div class="row g-4">
+                        <div class="col-md-6 col-xl-3">
+                            <div class="stat-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="stat-icon bg-secondary text-primary me-3">
+                                        <i class="fas fa-bullhorn"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-muted mb-0">Active Protests</p>
+                                        <h3 class="stat-number mb-0" id="active-protests">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3">
+                            <div class="stat-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="stat-icon bg-secondary text-primary me-3">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-muted mb-0">Community</p>
+                                        <h3 class="stat-number mb-0" id="community-members">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3">
+                            <div class="stat-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="stat-icon bg-secondary text-primary me-3">
+                                        <i class="fas fa-hand-holding-heart"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-muted mb-0">Causes</p>
+                                        <h3 class="stat-number mb-0" id="causes-supported">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl-3">
+                            <div class="stat-card">
+                                <div class="d-flex align-items-center">
+                                    <div class="stat-icon bg-secondary text-primary me-3">
+                                        <i class="fas fa-globe-africa"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-muted mb-0">Countries</p>
+                                        <h3 class="stat-number mb-0" id="countries-active">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map and Actions Row -->
+            <div class="row g-4 mb-4">
+                <!-- Africa Map -->
+                <div class="col-lg-8">
+                    <div class="map-section">
+                        <h4 class="mb-4"><i class="fas fa-map-marked-alt text-primary me-2"></i>Protest Activity in Africa</h4>
+                        <div class="map-container">
+                            <div class="country-tooltip" id="tooltip"></div>
+                            <svg viewBox="0 0 800 800" id="africa-map">
+                                <!-- North Africa -->
+                                <path class="country" id="morocco" d="M280,120 L320,110 L350,130 L340,160 L300,170 L270,150 Z" data-name="Morocco" data-status="none"></path>
+                                <path class="country" id="algeria" d="M320,110 L400,100 L440,140 L430,200 L380,220 L340,160 L350,130 Z" data-name="Algeria" data-status="none"></path>
+                                <path class="country" id="tunisia" d="M400,100 L420,95 L430,120 L420,140 L400,130 Z" data-name="Tunisia" data-status="none"></path>
+                                <path class="country" id="libya" d="M420,95 L520,90 L540,150 L520,220 L430,200 L440,140 L430,120 Z" data-name="Libya" data-status="none"></path>
+                                <path class="country past-protest" id="egypt" d="M520,90 L580,100 L590,180 L540,220 L520,150 Z" data-name="Egypt" data-status="past"></path>
+                                
+                                <!-- West Africa -->
+                                <path class="country active-protest" id="senegal" d="M200,280 L250,270 L260,300 L220,310 L190,300 Z" data-name="Senegal" data-status="active"></path>
+                                <path class="country" id="gambia" d="M205,295 L245,290 L245,300 L205,305 Z" data-name="Gambia" data-status="none"></path>
+                                <path class="country" id="guinea-bissau" d="M190,305 L220,310 L215,330 L185,325 Z" data-name="Guinea-Bissau" data-status="none"></path>
+                                <path class="country" id="guinea" d="M185,325 L215,330 L240,360 L200,380 L170,350 Z" data-name="Guinea" data-status="none"></path>
+                                <path class="country" id="sierra-leone" d="M170,350 L200,380 L180,410 L155,390 Z" data-name="Sierra Leone" data-status="none"></path>
+                                <path class="country" id="liberia" d="M155,390 L180,410 L175,450 L145,430 Z" data-name="Liberia" data-status="none"></path>
+                                <path class="country" id="ivory-coast" d="M175,450 L180,410 L200,380 L240,360 L280,380 L270,450 L220,470 Z" data-name="Ivory Coast" data-status="none"></path>
+                                <path class="country past-protest" id="ghana" d="M270,450 L280,380 L320,370 L330,440 L290,470 Z" data-name="Ghana" data-status="past"></path>
+                                <path class="country" id="togo" d="M330,440 L340,370 L350,375 L345,450 Z" data-name="Togo" data-status="none"></path>
+                                <path class="country" id="benin" d="M345,450 L350,375 L370,380 L365,455 Z" data-name="Benin" data-status="none"></path>
+                                <path class="country active-protest" id="nigeria" d="M365,455 L370,380 L320,370 L280,380 L260,300 L300,280 L380,290 L430,340 L450,420 L420,470 Z" data-name="Nigeria" data-status="active"></path>
+                                <path class="country" id="mali" d="M250,270 L340,160 L380,220 L370,280 L300,280 L260,300 Z" data-name="Mali" data-status="none"></path>
+                                <path class="country" id="burkina-faso" d="M280,310 L320,290 L360,310 L350,360 L300,350 Z" data-name="Burkina Faso" data-status="none"></path>
+                                <path class="country" id="niger" d="M340,220 L430,200 L470,260 L420,320 L360,310 L340,280 Z" data-name="Niger" data-status="none"></path>
+                                
+                                <!-- Central Africa -->
+                                <path class="country" id="chad" d="M430,200 L520,220 L530,310 L470,350 L420,320 L470,260 Z" data-name="Chad" data-status="none"></path>
+                                <path class="country" id="sudan" d="M520,220 L590,180 L620,260 L600,350 L530,380 L530,310 Z" data-name="Sudan" data-status="none"></path>
+                                <path class="country" id="cameroon" d="M420,320 L470,350 L480,420 L440,470 L400,450 L380,400 Z" data-name="Cameroon" data-status="none"></path>
+                                <path class="country" id="car" d="M470,350 L530,310 L580,350 L550,420 L480,420 Z" data-name="Central African Republic" data-status="none"></path>
+                                <path class="country" id="south-sudan" d="M530,380 L600,350 L620,420 L570,480 L530,450 Z" data-name="South Sudan" data-status="none"></path>
+                                <path class="country" id="ethiopia" d="M600,350 L680,320 L700,420 L640,480 L570,480 L620,420 Z" data-name="Ethiopia" data-status="none"></path>
+                                <path class="country" id="somalia" d="M680,320 L720,340 L700,480 L640,480 L700,420 Z" data-name="Somalia" data-status="none"></path>
+                                <path class="country" id="gabon" d="M380,450 L420,420 L430,490 L390,510 Z" data-name="Gabon" data-status="none"></path>
+                                <path class="country" id="congo" d="M420,420 L480,420 L490,500 L430,520 L430,490 Z" data-name="Congo" data-status="none"></path>
+                                <path class="country" id="drc" d="M480,420 L550,420 L570,480 L580,560 L520,620 L450,600 L430,520 L490,500 Z" data-name="DR Congo" data-status="none"></path>
+                                
+                                <!-- East Africa -->
+                                <path class="country active-protest" id="kenya" d="M570,480 L640,480 L650,560 L590,580 L560,540 Z" data-name="Kenya" data-status="active"></path>
+                                <path class="country active-protest" id="uganda" d="M530,450 L570,480 L560,540 L520,550 L510,500 Z" data-name="Uganda" data-status="active"></path>
+                                <path class="country" id="rwanda" d="M520,550 L540,550 L540,580 L520,580 Z" data-name="Rwanda" data-status="none"></path>
+                                <path class="country" id="burundi" d="M520,580 L540,580 L540,610 L520,610 Z" data-name="Burundi" data-status="none"></path>
+                                <path class="country active-protest" id="tanzania" d="M540,550 L590,580 L650,560 L670,650 L580,680 L540,620 Z" data-name="Tanzania" data-status="active"></path>
+                                
+                                <!-- Southern Africa -->
+                                <path class="country" id="angola" d="M380,520 L450,600 L440,680 L360,680 L340,600 Z" data-name="Angola" data-status="none"></path>
+                                <path class="country" id="zambia" d="M450,600 L520,620 L540,680 L480,720 L440,680 Z" data-name="Zambia" data-status="none"></path>
+                                <path class="country" id="malawi" d="M560,620 L580,600 L590,680 L565,700 Z" data-name="Malawi" data-status="none"></path>
+                                <path class="country" id="mozambique" d="M565,700 L590,680 L620,680 L640,760 L580,780 L550,740 Z" data-name="Mozambique" data-status="none"></path>
+                                <path class="country" id="zimbabwe" d="M520,680 L560,680 L565,700 L550,740 L500,730 Z" data-name="Zimbabwe" data-status="none"></path>
+                                <path class="country" id="botswana" d="M440,680 L500,680 L500,760 L440,780 L420,720 Z" data-name="Botswana" data-status="none"></path>
+                                <path class="country" id="namibia" d="M340,600 L360,680 L420,720 L400,780 L320,780 L300,680 Z" data-name="Namibia" data-status="none"></path>
+                                <path class="country active-protest" id="south-africa" d="M400,780 L420,720 L440,780 L500,760 L550,740 L580,780 L540,830 L420,830 Z" data-name="South Africa" data-status="active"></path>
+                                <path class="country" id="lesotho" d="M490,790 L510,780 L520,800 L500,810 Z" data-name="Lesotho" data-status="none"></path>
+                                <path class="country" id="eswatini" d="M545,765 L560,760 L565,780 L550,785 Z" data-name="Eswatini" data-status="none"></path>
+                                <path class="country" id="madagascar" d="M680,650 L720,640 L740,750 L700,780 L670,720 Z" data-name="Madagascar" data-status="none"></path>
+                            </svg>
+                        </div>
+                        <div class="map-legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: var(--primary);"></div>
+                                <span>Active Protests</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #FFB380;"></div>
+                                <span>Past Protests</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #e0e0e0;"></div>
+                                <span>No Activity</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions and Live Chat -->
+                <div class="col-lg-4">
+                    <div class="quick-actions mb-4">
+                        <h4 class="mb-4"><i class="fas fa-bolt text-primary me-2"></i>Quick Actions</h4>
+                        
+                        <!-- WhatsApp Group Button -->
+                        <a href="https://chat.whatsapp.com/KXaHtpdHHOY1Kd3b44uZ3U?mode=hqrt1" target="_blank" class="action-btn whatsapp-btn text-decoration-none">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <strong>Join WhatsApp Group</strong>
+                                <small class="d-block opacity-75">Connect with the community</small>
+                            </div>
+                        </a>
+                        
+                        <a href="donate.html" class="action-btn btn-light text-decoration-none">
+                            <i class="fas fa-heart text-danger"></i>
+                            <div>
+                                <strong>Make a Donation</strong>
+                                <small class="d-block text-muted">Support the cause</small>
+                            </div>
+                        </a>
+                        
+                        <a href="causes.html" class="action-btn btn-light text-decoration-none">
+                            <i class="fas fa-hand-holding-heart text-primary"></i>
+                            <div>
+                                <strong>View Causes</strong>
+                                <small class="d-block text-muted">See active campaigns</small>
+                            </div>
+                        </a>
+                        
+                        <a href="contact.html" class="action-btn btn-light text-decoration-none">
+                            <i class="fas fa-headset text-info"></i>
+                            <div>
+                                <strong>Get Support</strong>
+                                <small class="d-block text-muted">Need help? Contact us</small>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="activity-section">
+                        <h4 class="mb-4"><i class="fas fa-history text-primary me-2"></i>Recent Activity</h4>
+                        <div id="activity-list">
+                            <div class="loading-spinner">
+                                <div class="spinner-grow" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 footer pt-5">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h1 class="fw-bold text-primary mb-4">Care4<span class="text-white">Voices</span></h1>
+                    <p>Support the Voices of Gen Z. A community-powered platform for protest safety and empowerment.</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square me-1" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square me-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square me-1" href="#"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square me-0" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Contact Us</h5>
+                    <p><i class="fab fa-whatsapp me-3"></i>+255 687-799-929</p>
+                    <p><i class="fa fa-envelope me-3"></i>support@care4voices.org</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Quick Links</h5>
+                    <a class="btn btn-link" href="about.html">About Us</a>
+                    <a class="btn btn-link" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link" href="causes.html">Causes</a>
+                    <a class="btn btn-link" href="donate.html">Donate</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-light mb-4">Newsletter</h5>
+                    <p>Stay updated with our events and impact stories.</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a href="#">Care4Voices</a>, All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top" style="position: fixed; bottom: 30px; right: 30px; z-index: 99; display: none;">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Dashboard JavaScript -->
+    <script>
+        let currentUser = null;
+        let currentUserData = null;
+        let chatUnsubscribe = null;
+
+        // Wait for DOM to be fully loaded and then initialize the dashboard
+        // A setTimeout is used to ensure Firebase is likely initialized, though a more robust check might be needed in complex scenarios.
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initDashboard, 500);
+        });
+
+        function initDashboard() {
+            if (window.firebaseOnAuthStateChanged && window.firebaseAuth) {
+                window.firebaseOnAuthStateChanged(window.firebaseAuth, async (user) => {
+                    currentUser = user;
+                    if (user) {
+                        // User is signed in: load user data, stats, and activity
+                        await loadUserData(user);
+                        await loadDashboardStats();
+                        await loadRecentActivity();
+
+                        // Fetch user data specifically for chat (name, photoUrl)
+                        try {
+                            const userDoc = await window.firebaseGetDoc(
+                                window.firebaseDoc(window.firebaseDb, 'users', user.uid)
+                            );
+                            if (userDoc.exists()) {
+                                // Update currentUserData with data from Firestore
+                                currentUserData = { id: user.uid, ...userDoc.data() };
+                                // Fallback to email if name is not set in Firestore
+                                if (!currentUserData.name) {
+                                    currentUserData.name = user.email.split('@')[0];
+                                }
+                            } else {
+                                // Fallback if no user doc exists, use auth data
+                                currentUserData = { id: user.uid, name: user.displayName || user.email.split('@')[0], photoUrl: user.photoURL };
+                            }
+                            initializeChat(currentUserData); // Initialize chat with fetched user data
+                        } catch (error) {
+                            console.error('[v0] Error fetching user data for chat:', error);
+                            // If fetching fails, use basic auth info
+                            currentUserData = { id: user.uid, name: user.displayName || user.email.split('@')[0], photoUrl: user.photoURL };
+                            initializeChat(currentUserData);
+                        }
+                    } else {
+                        // User is signed out, redirect to login page
+                        window.location.href = 'login.html';
+                    }
+                });
+            } else {
+                console.log('[v0] Loading demo mode');
+                loadDemoMode();
+                initializeDemoChat();
+            }
+
+            // Initialize map tooltips, back-to-top button, and chat input listeners
+            initMapTooltips();
+            initBackToTop();
+            setupChatInput();
+        }
+
+        async function loadUserData(user) {
+            try {
+                // Get user profile from Firestore
+                const userDoc = await window.firebaseGetDoc(
+                    window.firebaseDoc(window.firebaseDb, 'users', user.uid)
+                );
+
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    console.log('[v0] User data from Firestore:', userData);
+                    
+                    const displayName = userData.name || user.displayName || user.email.split('@')[0];
+                    const initials = displayName.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+                    
+                    // Header avatar and name
+                    document.getElementById('user-name').textContent = displayName;
+                    
+                    const photoUrl = userData.photoUrl;
+                    console.log('[v0] Photo URL from Firestore:', photoUrl);
+                    
+                    if (photoUrl && photoUrl.trim() !== '') {
+                        // Header avatar
+                        const userAvatarText = document.getElementById('user-avatar-text');
+                        const userAvatarImg = document.getElementById('user-avatar-img');
+                        if (userAvatarText) userAvatarText.style.display = 'none';
+                        if (userAvatarImg) {
+                            userAvatarImg.src = photoUrl;
+                            userAvatarImg.style.display = 'block';
+                            // Add error handling for image loading
+                            userAvatarImg.onerror = function() {
+                                console.log('[v0] Header avatar image failed to load');
+                                this.style.display = 'none'; // Hide broken image
+                                if (userAvatarText) {
+                                    userAvatarText.style.display = 'flex'; // Show initials
+                                    userAvatarText.textContent = initials;
+                                }
+                            };
+                        }
+                        
+                        // Profile card avatar
+                        const profileAvatarText = document.getElementById('profile-avatar-text');
+                        const profileAvatarImg = document.getElementById('profile-avatar-img');
+                        if (profileAvatarText) profileAvatarText.style.display = 'none';
+                        if (profileAvatarImg) {
+                            profileAvatarImg.src = photoUrl;
+                            profileAvatarImg.style.display = 'block';
+                            // Add error handling for image loading
+                            profileAvatarImg.onerror = function() {
+                                console.log('[v0] Profile avatar image failed to load');
+                                this.style.display = 'none'; // Hide broken image
+                                if (profileAvatarText) {
+                                    profileAvatarText.style.display = 'flex'; // Show initials
+                                    profileAvatarText.textContent = initials;
+                                }
+                            };
+                        }
+                    } else {
+                        // No photo available, show initials
+                        const userAvatarText = document.getElementById('user-avatar-text');
+                        const profileAvatarText = document.getElementById('profile-avatar-text');
+                        if (userAvatarText) userAvatarText.textContent = initials;
+                        if (profileAvatarText) profileAvatarText.textContent = initials;
+                    }
+                    
+                    // Welcome message
+                    document.getElementById('welcome-message').textContent = `Welcome back, ${displayName}!`;
+                    
+                    // Profile card details
+                    document.getElementById('profile-name').textContent = displayName;
+                    document.getElementById('profile-role').textContent = userData.role === 'admin' ? 'Administrator' : 'Community Member';
+                    
+                    // Display user location if available
+                    if (userData.location) {
+                        document.getElementById('user-location').innerHTML = `<i class="fa fa-map-marker-alt me-2"></i>${userData.location}`;
+                        document.getElementById('profile-location-text').innerHTML = `<i class="fas fa-map-marker-alt"></i><span>${userData.location}</span>`;
+                    }
+                    
+                    // Calculate and display days active
+                    if (userData.createdAt) {
+                        const createdDate = userData.createdAt.toDate ? userData.createdAt.toDate() : new Date(userData.createdAt);
+                        const daysActive = Math.floor((new Date() - createdDate) / (1000 * 60 * 60 * 24)) + 1; // +1 for current day
+                        document.getElementById('profile-joined').textContent = daysActive;
+                    } else {
+                        document.getElementById('profile-joined').textContent = '1'; // Default to 1 day if no creation date
+                    }
+                    
+                    // Display number of causes supported, with a default value
+                    document.getElementById('profile-causes').textContent = userData.causesSupported || 3;
+                } else {
+                    // If no Firestore document, use auth data for display
+                    const displayName = user.displayName || user.email.split('@')[0];
+                    const initials = displayName[0].toUpperCase();
+                    
+                    document.getElementById('user-name').textContent = displayName;
+                    document.getElementById('user-avatar-text').textContent = initials;
+                    document.getElementById('profile-avatar-text').textContent = initials;
+                    document.getElementById('welcome-message').textContent = `Welcome back, ${displayName}!`;
+                    document.getElementById('profile-name').textContent = displayName;
+                    document.getElementById('profile-role').textContent = 'Community Member'; // Default role
+                }
+            } catch (error) {
+                console.error('[v0] Error loading user data:', error);
+                // Fallback to display user's email if any error occurs
+                const displayName = user.email.split('@')[0];
+                document.getElementById('user-name').textContent = displayName;
+                document.getElementById('user-avatar-text').textContent = displayName[0].toUpperCase();
+                document.getElementById('profile-avatar-text').textContent = displayName[0].toUpperCase();
+                document.getElementById('welcome-message').textContent = `Welcome back, ${displayName}!`;
+                document.getElementById('profile-name').textContent = displayName;
+            }
+        }
+
+        // Function to load dashboard statistics
+        async function loadDashboardStats() {
+            try {
+                // Fetch global stats from Firestore
+                const statsDoc = await window.firebaseGetDoc(
+                    window.firebaseDoc(window.firebaseDb, 'stats', 'global')
+                );
+
+                if (statsDoc.exists()) {
+                    const stats = statsDoc.data();
+                    // Animate counters with stats from Firestore or default values
+                    animateCounter('active-protests', stats.activeProtests || 6);
+                    animateCounter('community-members', stats.communityMembers || 2847);
+                    animateCounter('causes-supported', stats.causesSupported || 12);
+                    animateCounter('countries-active', stats.countriesActive || 6);
+                } else {
+                    // If stats document is not found, load default stats
+                    loadDefaultStats();
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+                loadDefaultStats(); // Fallback to default stats on error
+            }
+        }
+
+        // Function to load default statistics if Firestore data is unavailable
+        function loadDefaultStats() {
+            animateCounter('active-protests', 6);
+            animateCounter('community-members', 2847);
+            animateCounter('causes-supported', 12);
+            animateCounter('countries-active', 6);
+        }
+
+        // Function to load recent activity from Firestore
+        async function loadRecentActivity() {
+            const activityList = document.getElementById('activity-list');
+            
+            try {
+                // Query for the latest 5 activities, ordered by timestamp
+                const activitiesQuery = window.firebaseQuery(
+                    window.firebaseCollection(window.firebaseDb, 'activities'),
+                    window.firebaseOrderBy('timestamp', 'desc'),
+                    window.firebaseLimit(5)
+                );
+
+                const snapshot = await window.firebaseGetDocs(activitiesQuery);
+                
+                if (!snapshot.empty) {
+                    let html = '';
+                    snapshot.forEach((doc) => {
+                        const activity = doc.data();
+                        html += createActivityItem(activity);
+                    });
+                    activityList.innerHTML = html;
+                } else {
+                    // If no recent activities, load default/sample data
+                    loadDefaultActivity();
+                }
+            } catch (error) {
+                console.error('Error loading activities:', error);
+                loadDefaultActivity(); // Fallback to default activity on error
+            }
+        }
+
+        // Function to display sample recent activities if no data is found
+        function loadDefaultActivity() {
+            const activities = [
+                { type: 'protest', title: 'New protest in Nairobi', description: 'Youth climate march scheduled', timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), icon: 'fa-bullhorn', color: 'bg-primary' },
+                { type: 'donation', title: 'Donation received', description: '$150 for medical supplies', timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000), icon: 'fa-heart', color: 'bg-danger' },
+                { type: 'member', title: 'New member joined', description: 'Community growing stronger', timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), icon: 'fa-user-plus', color: 'bg-success' },
+                { type: 'update', title: 'Tanzania update', description: 'Legal aid distributed', timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), icon: 'fa-check-circle', color: 'bg-info' }
+            ];
+
+            let html = '';
+            activities.forEach(activity => {
+                html += `
+                    <div class="activity-item">
+                        <div class="activity-icon ${activity.color} text-white">
+                            <i class="fas ${activity.icon}"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h6>${activity.title}</h6>
+                            <p>${activity.description}</p>
+                            <small class="text-muted">${formatTime(activity.timestamp)}</small>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('activity-list').innerHTML = html;
+        }
+
+        // Helper function to create HTML for a single activity item
+        function createActivityItem(activity) {
+            const icons = {
+                protest: 'fa-bullhorn',
+                donation: 'fa-heart',
+                member: 'fa-user-plus',
+                update: 'fa-check-circle',
+                default: 'fa-info' // Fallback icon
+            };
+            
+            const colors = {
+                protest: 'bg-primary',
+                donation: 'bg-danger',
+                member: 'bg-success',
+                update: 'bg-info',
+                default: 'bg-secondary' // Fallback color
+            };
+
+            const iconClass = icons[activity.type] || icons.default;
+            const colorClass = colors[activity.type] || colors.default;
+
+            return `
+                <div class="activity-item">
+                    <div class="activity-icon ${colorClass} text-white">
+                        <i class="fas ${iconClass}"></i>
+                    </div>
+                    <div class="activity-content">
+                        <h6>${activity.title}</h6>
+                        <p>${activity.description}</p>
+                        <small class="text-muted">${formatTime(activity.timestamp)}</small>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to format time differences (e.g., "2 hours ago")
+        function formatTime(timestamp) {
+            if (!timestamp) return 'Recently';
+            
+            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+            const now = new Date();
+            const diff = now - date; // Difference in milliseconds
+            
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+            
+            if (minutes < 1) return 'Just now';
+            if (minutes < 60) return `${minutes} minutes ago`;
+            if (hours < 24) return `${hours} hours ago`;
+            return `${days} days ago`;
+        }
+
+        // Function to animate counters on the dashboard (e.g., stats)
+        function animateCounter(elementId, target) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const duration = 1500; // Animation duration
+            const start = 0;
+            const increment = target > 0 ? target / (duration / 16) : 0; // Calculate increment for smooth animation
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString(); // Final value, formatted
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString(); // Display integer part
+                }
+            }, 16); // Update roughly every 16ms (~60 FPS)
+        }
+
+        // Function to load demo mode data (if Firebase is not configured)
+        function loadDemoMode() {
+            // Retrieve demo user data from localStorage, with fallbacks
+            const demoUser = JSON.parse(localStorage.getItem('demoUser') || '{}');
+            console.log('[v0] Demo user data:', demoUser);
+            
+            const displayName = demoUser.name || 'Demo User';
+            const location = demoUser.location || 'Africa';
+            const photoUrl = demoUser.photoUrl || '';
+            const initials = displayName.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2) || 'DU';
+            
+            console.log('[v0] Demo mode photoUrl:', photoUrl);
+            
+            currentUserData = {
+                id: 'demo-user-' + Date.now(),
+                name: displayName,
+                photoUrl: photoUrl,
+                location: location
+            };
+            
+            // Header avatar and name
+            document.getElementById('user-name').textContent = displayName;
+            
+            if (photoUrl && photoUrl.trim() !== '') {
+                // Header avatar
+                const userAvatarText = document.getElementById('user-avatar-text');
+                const userAvatarImg = document.getElementById('user-avatar-img');
+                if (userAvatarText) userAvatarText.style.display = 'none';
+                if (userAvatarImg) {
+                    userAvatarImg.src = photoUrl;
+                    userAvatarImg.style.display = 'block';
+                    userAvatarImg.onerror = function() {
+                        console.log('[v0] Demo header avatar failed to load');
+                        this.style.display = 'none';
+                        if (userAvatarText) {
+                            userAvatarText.style.display = 'flex';
+                            userAvatarText.textContent = initials;
+                        }
+                    };
+                }
+                
+                // Profile card avatar
+                const profileAvatarText = document.getElementById('profile-avatar-text');
+                const profileAvatarImg = document.getElementById('profile-avatar-img');
+                if (profileAvatarText) profileAvatarText.style.display = 'none';
+                if (profileAvatarImg) {
+                    profileAvatarImg.src = photoUrl;
+                    profileAvatarImg.style.display = 'block';
+                    profileAvatarImg.onerror = function() {
+                        console.log('[v0] Demo profile avatar failed to load');
+                        this.style.display = 'none';
+                        if (profileAvatarText) {
+                            profileAvatarText.style.display = 'flex';
+                            profileAvatarText.textContent = initials;
+                        }
+                    };
+                }
+            } else {
+                document.getElementById('user-avatar-text').textContent = initials;
+                document.getElementById('profile-avatar-text').textContent = initials;
+            }
+            
+            // Welcome message
+            document.getElementById('welcome-message').textContent = `Welcome back, ${displayName}!`;
+            
+            // Profile card details
+            document.getElementById('profile-name').textContent = displayName;
+            document.getElementById('profile-role').textContent = 'Community Member';
+            document.getElementById('user-location').innerHTML = `<i class="fa fa-map-marker-alt me-2"></i>${location}`;
+            document.getElementById('profile-location-text').innerHTML = `<i class="fas fa-map-marker-alt"></i><span>${location}</span>`;
+            document.getElementById('profile-joined').textContent = '1';
+            document.getElementById('profile-causes').textContent = '3';
+            
+            // Load demo stats
+            updateStats(); // Renamed from loadDefaultStats to updateStats for clarity
+        }
+
+        // Function to update stats (used in both demo mode and logged-in mode for stats)
+        function updateStats() {
+            // This function can be used to update stats from different sources
+            // For demo mode, it calls animateCounter with hardcoded values.
+            // In a real scenario, it would call loadDashboardStats().
+            animateCounter('active-protests', 6);
+            animateCounter('community-members', 2847);
+            animateCounter('causes-supported', 12);
+            animateCounter('countries-active', 6);
+        }
+
+        // Initialize tooltips for map countries
+        function initMapTooltips() {
+            const tooltip = document.getElementById('tooltip');
+            const countries = document.querySelectorAll('.country');
+
+            countries.forEach(country => {
+                // Show tooltip on mouse enter
+                country.addEventListener('mouseenter', (e) => {
+                    const name = country.dataset.name;
+                    const status = country.dataset.status;
+                    
+                    let statusText = '';
+                    if (status === 'active') statusText = ' - Active Protests';
+                    else if (status === 'past') statusText = ' - Past Protests';
+
+                    tooltip.textContent = name + statusText;
+                    tooltip.classList.add('show'); // Add class to make it visible
+                });
+
+                // Update tooltip position on mouse move
+                country.addEventListener('mousemove', (e) => {
+                    const mapContainerRect = document.querySelector('.map-container').getBoundingClientRect();
+                    // Position tooltip relative to the map container for better accuracy
+                    tooltip.style.left = (e.clientX - mapContainerRect.left + 10) + 'px';
+                    tooltip.style.top = (e.clientY - mapContainerRect.top - 30) + 'px';
+                });
+
+                // Hide tooltip on mouse leave
+                country.addEventListener('mouseleave', () => {
+                    tooltip.classList.remove('show');
+                });
+
+                // Handle click event (e.g., show alert with country status)
+                country.addEventListener('click', () => {
+                    const name = country.dataset.name;
+                    const status = country.dataset.status;
+                    
+                    if (status === 'active' || status === 'past') {
+                        alert(`${name}: ${status === 'active' ? 'Currently has active protests' : 'Has had protests in the past'}`);
+                    } else {
+                        alert(`${name}: No activity recorded.`);
+                    }
+                });
+            });
+        }
+
+        // Initialize the "Back to Top" button functionality
+        function initBackToTop() {
+            const backToTop = document.querySelector('.back-to-top');
+            
+            // Show or hide the button based on scroll position
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) { // Show button after scrolling 300px down
+                    backToTop.style.display = 'flex';
+                    backToTop.style.alignItems = 'center';
+                    backToTop.style.justifyContent = 'center';
+                } else {
+                    backToTop.style.display = 'none';
+                }
+            });
+
+            // Smooth scroll to the top when the button is clicked
+            backToTop.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Handle user logout
+        function handleLogout() {
+            // Remove demo user data from localStorage if it exists
+            localStorage.removeItem('demoUser');
+            
+            if (window.firebaseSignOut && window.firebaseAuth) {
+                window.firebaseSignOut(window.firebaseAuth).then(() => {
+                    window.location.href = 'index.html'; // Redirect to homepage after successful logout
+                }).catch((error) => {
+                    console.error('Logout error:', error);
+                    alert('Error logging out. Please try again.');
+                });
+            } else {
+                // If Firebase signOut is not available (e.g., in demo mode without Firebase), redirect directly
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Placeholder function for "Edit Profile" button
+        function editProfile() {
+            alert('Edit profile feature coming soon!');
+        }
+        window.editProfile = editProfile; // Make globally accessible for the HTML button
+
+        // Initialize the live chat functionality
+        function initializeChat(userData) {
+            currentUserData = userData;
+            console.log('[v0] Initializing chat with user:', userData);
+            
+            const messagesRef = window.firebaseCollection(window.firebaseDb, 'chat_messages');
+            const messagesQuery = window.firebaseQuery(
+                messagesRef,
+                window.firebaseOrderBy('timestamp', 'asc'),
+                window.firebaseLimit(100)
+            );
+
+            if (chatUnsubscribe) {
+                chatUnsubscribe();
+            }
+
+            chatUnsubscribe = window.firebaseOnSnapshot(messagesQuery, (snapshot) => {
+                const messagesContainer = document.getElementById('chat-messages');
+                
+                if (snapshot.empty) {
+                    messagesContainer.innerHTML = `
+                        <div class="chat-empty">
+                            <i class="fas fa-comments"></i>
+                            <p>No messages yet.<br>Start the conversation!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                messagesContainer.innerHTML = '';
+                
+                snapshot.forEach((doc) => {
+                    const message = doc.data();
+                    const isOwnMessage = message.userId === (window.firebaseAuth?.currentUser?.uid || currentUserData?.id);
+                    
+                    const messageEl = document.createElement('div');
+                    messageEl.className = `chat-message ${isOwnMessage ? 'own-message' : ''}`;
+                    
+                    const timestamp = message.timestamp 
+                        ? new Date(message.timestamp.toDate()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+                        : 'Now';
+                    
+                    let avatarContent;
+                    if (message.photoUrl && message.photoUrl.trim() !== '') {
+                        // Added onerror to handle broken image links gracefully
+                        avatarContent = `<img src="${message.photoUrl}" alt="${message.userName}" onerror="this.style.display='none'; this.parentElement.innerHTML='${getInitials(message.userName)}';">`;
+                    } else {
+                        avatarContent = getInitials(message.userName);
+                    }
+                    
+                    messageEl.innerHTML = `
+                        <div class="chat-message-avatar">
+                            ${avatarContent}
+                        </div>
+                        <div class="chat-message-content">
+                            <div class="chat-message-name">${isOwnMessage ? 'You' : escapeHtml(message.userName)}</div>
+                            <div class="chat-message-text">${escapeHtml(message.text)}</div>
+                            <div class="chat-message-time">${timestamp}</div>
+                        </div>
+                    `;
+                    
+                    messagesContainer.appendChild(messageEl);
+                });
+
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, (error) => {
+                console.error('[v0] Chat listener error:', error);
+            });
+        }
+
+        function initializeDemoChat() {
+            const messagesContainer = document.getElementById('chat-messages');
+            console.log('[v0] Initializing demo chat');
+            
+            // Check if current user has a photo from ImgBB
+            const userPhoto = currentUserData?.photoUrl || '';
+            
+            const demoMessages = [
+                { 
+                    userName: 'Alice Mwangi', 
+                    text: 'Hey everyone! Any updates on the upcoming protest?', 
+                    photoUrl: 'https://i.ibb.co/placeholder1/alice.jpg', // Placeholder URL
+                    time: '10:30 AM'
+                },
+                { 
+                    userName: 'Bob Okonkwo', 
+                    text: 'Yes, the details are being finalized. Will share soon!', 
+                    photoUrl: 'https://i.ibb.co/placeholder2/bob.jpg', // Placeholder URL
+                    time: '10:32 AM'
+                },
+                { 
+                    userName: currentUserData?.name || 'You', 
+                    text: 'Great, looking forward to it!', 
+                    photoUrl: userPhoto, // Use current user's photo if available
+                    isOwnMessage: true,
+                    time: '10:35 AM'
+                }
+            ];
+            
+            messagesContainer.innerHTML = '';
+            
+            demoMessages.forEach(msg => {
+                const messageEl = document.createElement('div');
+                messageEl.className = `chat-message ${msg.isOwnMessage ? 'own-message' : ''}`;
+                
+                let avatarContent;
+                // Check if photoUrl is valid and not a placeholder before rendering image
+                if (msg.photoUrl && msg.photoUrl.trim() !== '' && !msg.photoUrl.includes('placeholder')) {
+                    // Added onerror to handle broken image links gracefully
+                    avatarContent = `<img src="${msg.photoUrl}" alt="${msg.userName}" onerror="this.style.display='none'; this.parentElement.textContent='${getInitials(msg.userName)}';">`;
+                } else {
+                    avatarContent = getInitials(msg.userName);
+                }
+                
+                messageEl.innerHTML = `
+                    <div class="chat-message-avatar">
+                        ${avatarContent}
+                    </div>
+                    <div class="chat-message-content">
+                        <div class="chat-message-name">${msg.isOwnMessage ? 'You' : msg.userName}</div>
+                        <div class="chat-message-text">${msg.text}</div>
+                        <div class="chat-message-time">${msg.time}</div>
+                    </div>
+                `;
+                
+                messagesContainer.appendChild(messageEl);
+            });
+            
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('chat-send-btn');
+            const text = input.value.trim();
+
+            if (!text || !currentUserData) {
+                console.log('[v0] Cannot send - no text or user data');
+                return;
+            }
+
+            sendBtn.disabled = true;
+            input.disabled = true;
+
+            try {
+                if (window.firebaseAddDoc && window.firebaseDb) {
+                    const messagesRef = window.firebaseCollection(window.firebaseDb, 'chat_messages');
+                    
+                    const messageData = {
+                        text: text,
+                        userId: window.firebaseAuth?.currentUser?.uid || currentUserData.id,
+                        userName: currentUserData.name || 'Anonymous',
+                        photoUrl: currentUserData.photoUrl || '', // Include user's photo URL
+                        timestamp: window.firebaseServerTimestamp()
+                    };
+                    
+                    console.log('[v0] Sending message:', messageData);
+                    await window.firebaseAddDoc(messagesRef, messageData);
+                    input.value = '';
+                } else {
+                    // Demo mode - add message locally
+                    const messagesContainer = document.getElementById('chat-messages');
+                    const emptyMsg = messagesContainer.querySelector('.chat-empty');
+                    if (emptyMsg) emptyMsg.remove();
+                    
+                    const messageEl = document.createElement('div');
+                    messageEl.className = 'chat-message own-message';
+                    
+                    let avatarContent;
+                    if (currentUserData.photoUrl && currentUserData.photoUrl.trim() !== '') {
+                        avatarContent = `<img src="${currentUserData.photoUrl}" alt="You">`;
+                    } else {
+                        avatarContent = getInitials(currentUserData.name);
+                    }
+                    
+                    messageEl.innerHTML = `
+                        <div class="chat-message-avatar">
+                            ${avatarContent}
+                        </div>
+                        <div class="chat-message-content">
+                            <div class="chat-message-name">You</div>
+                            <div class="chat-message-text">${escapeHtml(text)}</div>
+                            <div class="chat-message-time">Now</div>
+                        </div>
+                    `;
+                    
+                    messagesContainer.appendChild(messageEl);
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    input.value = '';
+                }
+            } catch (error) {
+                console.error('[v0] Error sending message:', error);
+                alert('Failed to send message. Please try again.');
+            } finally {
+                sendBtn.disabled = false;
+                input.disabled = false;
+                input.focus();
+            }
+        }
+        window.sendChatMessage = sendChatMessage;
+
+        // Re-binding the auth state change listener. This replaces the previous listener in initDashboard.
+        // This ensures the auth state logic is correctly handled.
+        if (window.firebaseAuth) {
+            window.firebaseOnAuthStateChanged(window.firebaseAuth, async (user) => {
+                currentUser = user; // Update global currentUser variable
+                if (user) {
+                    // User is signed in: load their data and initialize dashboard features
+                    await loadUserData(user);
+                    await loadDashboardStats();
+                    await loadRecentActivity();
+
+                    // Fetch user data for chat initialization
+                    try {
+                        const userDoc = await window.firebaseGetDoc(
+                            window.firebaseDoc(window.firebaseDb, 'users', user.uid)
+                        );
+                        if (userDoc.exists()) {
+                            // Update currentUserData from Firestore doc
+                            currentUserData = { id: user.uid, ...userDoc.data() };
+                            if (!currentUserData.name) {
+                                currentUserData.name = user.email.split('@')[0]; // Fallback name
+                            }
+                        } else {
+                            // Fallback if no user doc, use auth data
+                            currentUserData = { id: user.uid, name: user.displayName || user.email.split('@')[0], photoUrl: user.photoURL };
+                        }
+                        initializeChat(currentUserData); // Initialize chat with user data
+                    } catch (error) {
+                        console.error('Error fetching user data for chat:', error);
+                        // Fallback to basic auth data if fetching fails
+                        currentUserData = { id: user.uid, name: user.displayName || user.email.split('@')[0], photoUrl: user.photoURL };
+                        initializeChat(currentUserData);
+                    }
+
+                } else {
+                    // User is signed out: unsubscribe from chat and redirect to login
+                    if (chatUnsubscribe) {
+                        chatUnsubscribe(); // Remove chat listener
+                        chatUnsubscribe = null;
+                    }
+                    window.location.href = 'login.html'; // Redirect to login page
+                }
+            });
+        } else {
+            console.warn("window.firebaseAuth is not available, auth state listener not set.");
+        }
+
+    </script>
+</body>
+
+</html>
